@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notícias | Clube de Oficiais dos Bombeiros do DF</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="index.html" aria-label="Página inicial do Clube de Oficiais">
+          <span class="logo__mark">COB</span>
+          <span>Clube de Oficiais dos Bombeiros do DF</span>
+        </a>
+        <nav class="nav" aria-label="Menu principal">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="index.html">Home</a></li>
+            <li><a class="nav__link" href="noticias.html">Notícias</a></li>
+            <li><a class="nav__link" href="convenios.html">Convênios</a></li>
+            <li><a class="nav__link" href="contato.html">Contato</a></li>
+          </ul>
+          <div class="cta-group" aria-label="Ações principais">
+            <a class="button button--secondary" href="#">Documentos</a>
+            <a class="button button--primary" href="#">Associe-se</a>
+          </div>
+        </nav>
+        <button
+          class="hamburger"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          data-menu-button
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="container mobile-menu" data-mobile-menu>
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="noticias.html">Notícias</a>
+        <a class="nav__link" href="convenios.html">Convênios</a>
+        <a class="nav__link" href="contato.html">Contato</a>
+        <div class="hero__actions">
+          <a class="button button--secondary" href="#">Documentos</a>
+          <a class="button button--primary" href="#">Associe-se</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="container hero">
+        <div>
+          <p class="card__tag">Notícias e comunicados</p>
+          <h1 class="hero__title">Atualizações do Clube de Oficiais</h1>
+          <p class="hero__subtitle">
+            Acompanhe iniciativas, campanhas e decisões institucionais que fortalecem a comunidade
+            bombeiro.
+          </p>
+        </div>
+        <div class="card">
+          <h2 class="card__title">Notícia principal (layout)</h2>
+          <p class="card__text">
+            Destaque para uma comunicação estratégica com texto ampliado. Espaço ideal para
+            comunicados emergenciais, assembleias e ações relevantes da diretoria.
+          </p>
+        </div>
+      </section>
+
+      <section class="container section">
+        <div class="section__header">
+          <h2 class="section__title">Últimas publicações</h2>
+          <p class="section__subtitle">Conteúdo ilustrativo para validação de layout.</p>
+        </div>
+        <div class="grid grid--3">
+          <article class="card">
+            <span class="card__tag">Comunicado</span>
+            <h3 class="card__title">Reajuste em convênios educacionais</h3>
+            <p class="card__text">Novas condições para cursos de pós-graduação e idiomas.</p>
+          </article>
+          <article class="card">
+            <span class="card__tag">Evento</span>
+            <h3 class="card__title">Semana da integração</h3>
+            <p class="card__text">Programação com palestras e ações para associados.</p>
+          </article>
+          <article class="card">
+            <span class="card__tag">Gestão</span>
+            <h3 class="card__title">Relatório de transparência publicado</h3>
+            <p class="card__text">Resultados financeiros e metas do semestre.</p>
+          </article>
+          <article class="card">
+            <span class="card__tag">Convênio</span>
+            <h3 class="card__title">Nova parceria com academia</h3>
+            <p class="card__text">Descontos exclusivos para associados e familiares.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__grid">
+        <div>
+          <div class="logo">
+            <span class="logo__mark">COB</span>
+            <span>Clube de Oficiais dos Bombeiros do DF</span>
+          </div>
+          <p class="footer__note">Protótipo visual • Conteúdo ilustrativo</p>
+        </div>
+        <div class="footer__links" aria-label="Links rápidos">
+          <a href="index.html">Home</a>
+          <a href="noticias.html">Notícias</a>
+          <a href="convenios.html">Convênios</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
