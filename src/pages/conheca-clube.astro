@@ -1,0 +1,36 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Conhe&ccedil;a o Clube | Clube dos Oficiais CBMDF">
+  <Header />
+<div class="container breadcrumb-wrap">
+  <nav class="breadcrumb" aria-label="Trilha de navegacao">
+    <span>Voc&ecirc; est&aacute; aqui:</span>
+    <a href="index.html">In&iacute;cio</a>
+    <span>/</span>
+    <span>Institucional</span>
+    <span>/</span>
+    <span>Conhe&ccedil;a o Clube</span>
+  </nav>
+</div>
+<main class="main-content">
+  <div class="container">
+    <section class="page-section">
+      <h1 class="page-title">Conhe&ccedil;a o Clube</h1>
+      <p class="page-subtitle">Conteudo consolidado de estrutura, beneficios e convenios institucionais.</p>
+      <div class="section-divider"></div>
+      <div class="legacy-grid legacy-grid--3">
+        <article class="legacy-card"><div class="legacy-card__head">Estrutura</div><div class="legacy-card__body"><p>Piscinas, campo de futebol, churrasqueiras, salao de festas e areas de convivio.</p></div></article>
+        <article class="legacy-card"><div class="legacy-card__head">Beneficios</div><div class="legacy-card__body"><p>Acesso a eventos, programacao social, agenda esportiva e servicos para associados.</p></div></article>
+        <article class="legacy-card"><div class="legacy-card__head">Conveniados</div><div class="legacy-card__body"><p>Parcerias em saude, educacao e bem-estar para socios e dependentes.</p><ul><li>Clinica Essencial</li><li>Academia Vital</li><li>Universidade Leste</li><li>Colegio Horizonte Azul</li></ul></div></article>
+      </div>
+      <div class="info-banner" style="margin-top:20px;">A rota antiga de conv&ecirc;nios foi incorporada nesta pagina para manter a navegacao unificada.</div>
+    </section>
+  </div>
+</main>
+  <Footer />
+</BaseLayout>
+

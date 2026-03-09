@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Diretoria | Clube dos Oficiais CBMDF">
+  <Header />
+  <div class="container breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Trilha de navegacao">
+      <span>Voc&ecirc; est&aacute; aqui:</span>
+      <a href="index.html">In&iacute;cio</a>
+      <span>/</span>
+      <span>Institucional</span>
+      <span>/</span>
+      <span>Diretoria</span>
+    </nav>
+  </div>
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <h1 class="page-title">Diretoria</h1>
+        <div class="section-divider"></div>
+        <div class="legacy-table-wrap">
+          <div class="legacy-table-title">Diretoria Executiva</div>
+          <table class="legacy-table">
+            <thead><tr><th>Posto</th><th>Nome</th><th>Cargo</th></tr></thead>
+            <tbody>
+              <tr><td>TC</td><td>Eugenio Cesar Nogueira</td><td>Presidente</td></tr>
+              <tr><td>TC</td><td>Valdir Luiz Ferrari Junior</td><td>Vice-Presidente</td></tr>
+              <tr><td>CEL</td><td>Renato de Souza Brandao</td><td>1&ordm; Tesoureiro</td></tr>
+              <tr><td>TC</td><td>Sandro Gomes Santos da Silva</td><td>1&ordm; Secretario</td></tr>
+              <tr><td>MAJ</td><td>Vitor Mariano</td><td>Diretor Socio Cultural</td></tr>
+              <tr><td>TC</td><td>Evandro Tomaz de Aquino</td><td>Diretor de Atividades Desportivas</td></tr>
+              <tr><td>CEL</td><td>Atila Gomes Nascimento</td><td>Diretor Administrativo e de Patrimonio</td></tr>
+              <tr><td>MAJ</td><td>Ozinaldo Vieira de Morais</td><td>Sub-Diretor Adm. e de Patrimonio</td></tr>
+              <tr><td>TC</td><td>Paulo Roberto</td><td>Diretor de Comunicacao Social</td></tr>
+              <tr><td>CEL</td><td>Jose Fernandes Motta Junior</td><td>Sub-Diretor de Comunicacao Social</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

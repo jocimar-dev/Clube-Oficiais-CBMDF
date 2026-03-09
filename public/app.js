@@ -111,8 +111,7 @@ if (!activeGroup) {
     associe: ['associe-se.html'],
     localizacao: ['localizacao.html'],
     contatos: ['contatos.html'],
-    noticias: ['noticias.html'],
-    galeria: ['galeria.html']
+    noticias: ['noticias.html']
   };
 
   Object.entries(pathGroupMap).forEach(([group, paths]) => {
