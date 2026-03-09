@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Not&iacute;cias | Clube dos Oficiais CBMDF">
+  <Header />
+  <div class="container breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Trilha de navegacao">
+      <span>Voc&ecirc; est&aacute; aqui:</span>
+      <a href="index.html">In&iacute;cio</a>
+      <span>/</span>
+      <span>Not&iacute;cias</span>
+    </nav>
+  </div>
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <h1 class="page-title">Not&iacute;cias</h1>
+        <p class="page-subtitle">Comunicados institucionais, agenda e atualizacoes da gestao.</p>
+        <div class="section-divider"></div>
+        <div class="legacy-grid legacy-grid--2">
+          <article class="legacy-card"><div class="legacy-card__head">Comunicado Oficial</div><div class="legacy-card__body"><p><strong>Assembleia geral extraordinaria</strong> dia 28/03, as 19h, no salao principal.</p><p>Pauta: prestacao de contas e planejamento anual.</p></div></article>
+          <article class="legacy-card"><div class="legacy-card__head">Eventos</div><div class="legacy-card__body"><p>Calendario social do semestre atualizado com novas datas.</p><p>Consulte os canais oficiais para inscricoes.</p></div></article>
+          <article class="legacy-card"><div class="legacy-card__head">Transpar&ecirc;ncia</div><div class="legacy-card__body"><p>Documentos de referencia 2024 ja estao no portal anual.</p><p><a href="transparencia.html#ano-2024">Acessar secoes anuais</a></p></div></article>
+          <article class="legacy-card"><div class="legacy-card__head">Convivio e lazer</div><div class="legacy-card__body"><p>Melhorias na area de churrasqueiras e agenda familiar.</p></div></article>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

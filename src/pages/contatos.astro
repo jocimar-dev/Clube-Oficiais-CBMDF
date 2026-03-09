@@ -1,0 +1,41 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Contatos | Clube dos Oficiais CBMDF">
+  <Header />
+<div class="container breadcrumb-wrap">
+  <nav class="breadcrumb" aria-label="Trilha de navegacao">
+    <span>Voc&ecirc; est&aacute; aqui:</span>
+    <a href="index.html">In&iacute;cio</a>
+    <span>/</span>
+    <span>Contatos</span>
+  </nav>
+</div>
+<main class="main-content">
+  <div class="container">
+    <section class="page-section">
+      <h1 class="page-title">Contatos</h1>
+      <p class="page-subtitle">Canais de atendimento da secretaria e contato institucional.</p>
+      <div class="section-divider"></div>
+      <div class="legacy-split">
+        <div>
+          <div class="legacy-card"><div class="legacy-card__head">Canais Diretos</div><div class="legacy-card__body"><p>Telefone: <a href="tel:+556132246041">(61) 3224-6041</a></p><p>WhatsApp: <a href="https://wa.me/5561986257009" target="_blank" rel="noopener noreferrer">(61) 98625-7009</a></p><p>E-mail: <a href="mailto:cocbmdf@uol.com.br">cocbmdf@uol.com.br</a></p></div></div>
+          <div class="legacy-card" style="margin-top:18px;"><div class="legacy-card__head">Hor&aacute;rios de atendimento</div><div class="legacy-card__body"><p>Ter&ccedil;a a Sexta: 09h &agrave;s 17h</p><p>S&aacute;bado, Domingo e Feriados: 09h &agrave;s 18h</p><p>Secretaria: Ter&ccedil;a a S&aacute;bado, 09h &agrave;s 17h</p></div></div>
+        </div>
+        <form class="form-block" data-form aria-label="Formulario de contato institucional">
+          <div><label for="nome">Nome</label><input id="nome" name="nome" type="text" required placeholder="Seu nome" /></div>
+          <div><label for="email">E-mail</label><input id="email" name="email" type="email" required placeholder="voce@email.com" /></div>
+          <div><label for="assunto">Assunto</label><select id="assunto" name="assunto" required><option value="">Selecione</option><option value="associacao">Associacao</option><option value="secretaria">Secretaria</option><option value="eventos">Eventos</option></select></div>
+          <div><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" required placeholder="Digite sua mensagem"></textarea></div>
+          <button class="button-primary" type="submit">Enviar mensagem</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+  <Footer />
+</BaseLayout>
+

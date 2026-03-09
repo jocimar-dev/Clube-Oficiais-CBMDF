@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Hor&aacute;rios | Clube dos Oficiais CBMDF">
+  <Header />
+  <div class="container breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Trilha de navegacao">
+      <span>Voc&ecirc; est&aacute; aqui:</span>
+      <a href="index.html">In&iacute;cio</a>
+      <span>/</span>
+      <span>Institucional</span>
+      <span>/</span>
+      <span>Hor&aacute;rios de Funcionamento</span>
+    </nav>
+  </div>
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <h1 class="page-title">Hor&aacute;rio de Funcionamento do Clube</h1>
+        <div class="section-divider"></div>
+        <ul class="legacy-line-list">
+          <li>Ter&ccedil;a a Sexta: de 09h &agrave;s 17h</li>
+          <li>S&aacute;bado, Domingo e Feriados: de 09h &agrave;s 18h</li>
+        </ul>
+        <h2 class="page-title" style="margin-top:26px;">Hor&aacute;rio de funcionamento da secretaria</h2>
+        <div class="section-divider"></div>
+        <ul class="legacy-line-list">
+          <li>Ter&ccedil;a a S&aacute;bado: de 09h &agrave;s 17h</li>
+          <li>Domingo e Feriados: fechado</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

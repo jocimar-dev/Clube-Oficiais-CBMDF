@@ -1,0 +1,31 @@
+{
+  "name": "clube-oficiais-cbmdf",
+  "version": "1.0.0",
+  "description": "Site estatico institucional do Clube de Oficiais dos Bombeiros do DF, com layout legado responsivo.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jocimar-dev/Clube-Oficiais-CBMDF.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/jocimar-dev/Clube-Oficiais-CBMDF/issues"
+  },
+  "homepage": "https://github.com/jocimar-dev/Clube-Oficiais-CBMDF#readme",
+  "dependencies": {
+    "astro": "^5.18.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "typescript": "^5.9.3"
+  }
+}

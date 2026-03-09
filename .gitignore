@@ -28,5 +28,7 @@ dist/
 build/
 coverage/
 .cache/
+.astro/
+node_modules/
 tmp/
 temp/

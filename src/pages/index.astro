@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Home | Clube dos Oficiais CBMDF">
+  <Header />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <h1 class="page-title">Seu clube, sua casa.</h1>
+        <p class="page-subtitle">Estrutura completa para lazer, esporte e convivio da familia bombeiro militar.</p>
+      </section>
+      <section class="page-section">
+        <h2 class="page-title">Nossa Estrutura</h2>
+        <p class="page-subtitle">Destaques de estrutura, lazer e programacao social do clube.</p>
+        <div class="legacy-banner" data-banner-slider>
+          <div class="legacy-banner__viewport">
+            <article class="legacy-banner__slide is-active" data-banner-slide><img src="images/piscina1.png" alt="Area de piscinas do clube" loading="lazy" /><p class="legacy-banner__caption">Area de piscinas para lazer da familia bombeiro militar.</p></article>
+            <article class="legacy-banner__slide" data-banner-slide><img src="images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais" loading="lazy" /><p class="legacy-banner__caption">Entrada principal e espacos de convivio para associados.</p></article>
+            <article class="legacy-banner__slide" data-banner-slide><img src="images/eventos.png" alt="Evento realizado no clube" loading="lazy" /><p class="legacy-banner__caption">Eventos sociais e encontros institucionais ao longo do ano.</p></article>
+            <article class="legacy-banner__slide" data-banner-slide><img src="images/camp-futebol.png" alt="Campo esportivo do clube" loading="lazy" /><p class="legacy-banner__caption">Estrutura esportiva com campo e atividades ao ar livre.</p></article>
+          </div>
+          <div class="legacy-banner__dots" aria-label="Controle do banner">
+            <button type="button" data-banner-dot class="is-active" aria-label="Banner 1" aria-pressed="true"></button>
+            <button type="button" data-banner-dot aria-label="Banner 2" aria-pressed="false"></button>
+            <button type="button" data-banner-dot aria-label="Banner 3" aria-pressed="false"></button>
+            <button type="button" data-banner-dot aria-label="Banner 4" aria-pressed="false"></button>
+          </div>
+        </div>
+      </section>
+      <section class="page-section legacy-split">
+        <div>
+          <h2 class="page-title">Informativos</h2>
+          <div class="section-divider"></div>
+          <div class="legacy-grid legacy-grid--2">
+            <article class="legacy-card"><div class="legacy-card__head">Informativo Setembro</div><div class="legacy-card__body"><p>Resumo das acoes institucionais e agenda de atividades do clube.</p><p><a href="noticias.html">Visualizar publicacao</a></p></div></article>
+            <article class="legacy-card"><div class="legacy-card__head">Informativo Maio</div><div class="legacy-card__body"><p>Atualizacoes sobre eventos, melhorias e orientacoes aos associados.</p><p><a href="noticias.html">Visualizar publicacao</a></p></div></article>
+          </div>
+        </div>
+        <aside>
+          <article class="legacy-card"><div class="legacy-card__head">Links uteis</div><div class="legacy-card__body"><ul class="legacy-link-list"><li><a href="https://www.cbm.df.gov.br/" target="_blank" rel="noopener noreferrer">Corpo de Bombeiros</a></li><li><a href="https://www.assofbm.org.br/" target="_blank" rel="noopener noreferrer">ASSOFBM-DF</a></li><li><a href="institucional.html">Institucional</a></li><li><a href="transparencia.html#ano-2024">Transparencia</a></li></ul></div></article>
+        </aside>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+

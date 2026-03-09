@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Hist&oacute;ria | Clube dos Oficiais CBMDF">
+  <Header />
+  <div class="container breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Trilha de navegacao">
+      <span>Voc&ecirc; est&aacute; aqui:</span>
+      <a href="index.html">In&iacute;cio</a>
+      <span>/</span>
+      <span>Institucional</span>
+      <span>/</span>
+      <span>Hist&oacute;ria</span>
+    </nav>
+  </div>
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <h1 class="page-title">Hist&oacute;ria do Clube</h1>
+        <div class="section-divider"></div>
+        <p>O Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal foi criado em 02 de dezembro de 1989, conforme registros institucionais da epoca.</p>
+        <p style="margin-top:12px;">A instituicao nasceu para integrar a familia bombeiro militar, oferecer estrutura de lazer e fortalecer a representacao social dos oficiais.</p>
+        <p style="margin-top:12px;">Ao longo dos anos, o clube consolidou seu papel com acoes de transparencia e ampliacao de beneficios.</p>
+        <div class="legacy-table-wrap" style="margin-top:20px;">
+          <div class="legacy-table-title">Presidentes do Clube (hist&oacute;rico)</div>
+          <table class="legacy-table">
+            <thead><tr><th>Posto</th><th>Nome</th><th>Ano</th></tr></thead>
+            <tbody>
+              <tr><td>TC QOBM/Comb.</td><td>Luiz Carlos Serafim Silva</td><td>1991 a 1991</td></tr>
+              <tr><td>TC QOBM/Comb.</td><td>Benjamim Ferreira Bispo</td><td>1992 a 1997</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Jose Carlos Pereira Duarte</td><td>1998 a 1999</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Milton Antonio Paduan</td><td>2000 a 2001</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Renato Ferreira Guimaraes</td><td>2002 a 2005</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Evaldo Marques Rabelo</td><td>2006 a 2007</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Edilson Bezerra de Oliveira</td><td>2008 a 2009</td></tr>
+              <tr><td>TC QOBM/Comb.</td><td>Paulo Arthur Santa Cruz dos Santos</td><td>2010 a 2013</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Edwin Aldrin Franco de Oliveira</td><td>2014 a 2017</td></tr>
+              <tr><td>CEL QOBM/Comb.</td><td>Valdir Luiz Ferrari Junior</td><td>2018 a 2019</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
