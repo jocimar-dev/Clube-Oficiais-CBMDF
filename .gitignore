@@ -30,5 +30,6 @@ coverage/
 .cache/
 .astro/
 node_modules/
+.vercel/
 tmp/
 temp/
