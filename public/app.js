@@ -102,12 +102,12 @@ if (!activeGroup) {
     institucional: [
       'institucional.html',
       'historia.html',
-      'diretoria.html',
       'horarios.html',
       'conheca-clube.html',
       'regulamentos.html'
     ],
-    transparencia: ['transparencia.html'],
+    diretoria: ['diretoria.html'],
+    estrutura: ['estrutura.html'],
     associe: ['associe-se.html'],
     localizacao: ['localizacao.html'],
     contatos: ['contatos.html'],

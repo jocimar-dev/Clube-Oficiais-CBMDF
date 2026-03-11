@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Estrutura | Clube dos Oficiais CBMDF">
+  <Header />
+  <div class="container breadcrumb-wrap">
+    <nav class="breadcrumb" aria-label="Trilha de navegacao">
+      <span>Voc&ecirc; est&aacute; aqui:</span>
+      <a href="index.html">In&iacute;cio</a>
+      <span>/</span>
+      <span>Institucional</span>
+      <span>/</span>
+      <span>Estrutura</span>
+    </nav>
+  </div>
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <h1 class="page-title">Estrutura</h1>
+        <p class="page-subtitle">Espa&ccedil;os de lazer, esporte e conviv&ecirc;ncia do Clube dos Oficiais CBMDF.</p>
+        <div class="section-divider"></div>
+        <div class="gallery-legacy__grid">
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Piscinas</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/piscina1.png" alt="Area principal de piscinas do clube" loading="lazy" />
+              <figcaption>Espa&ccedil;o para lazer familiar.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Entrada</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/entrada-clube.jpg" alt="Entrada principal do clube" loading="lazy" />
+              <figcaption>Acesso principal do complexo.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Eventos</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/eventos.png" alt="Area de eventos do clube" loading="lazy" />
+              <figcaption>Estrutura para atividades sociais.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Campo</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/camp-futebol.png" alt="Campo esportivo do clube" loading="lazy" />
+              <figcaption>Espa&ccedil;o para pr&aacute;ticas esportivas.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Lazer Aqu&aacute;tico</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/piscina01.png" alt="Piscina auxiliar e area de lazer" loading="lazy" />
+              <figcaption>Ambiente para descanso e recrea&ccedil;&atilde;o.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Area de Lazer</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/area-lazer.png" alt="Area de lazer do clube" loading="lazy" />
+              <figcaption>Conviv&ecirc;ncia para associados e fam&iacute;lia.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Programa&ccedil;&atilde;o Cultural</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/show-forro.png" alt="Evento musical na estrutura do clube" loading="lazy" />
+              <figcaption>Eventos culturais ao longo do ano.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Ambiente Social</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/caderas-novas.jpg" alt="Ambiente social do clube com decoracao" loading="lazy" />
+              <figcaption>Espa&ccedil;os preparados para encontros.</figcaption>
+            </figure>
+          </article>
+          <article class="gallery-legacy__item">
+            <h3 class="gallery-legacy__item-title">Piscina Infantil</h3>
+            <figure class="gallery-legacy__media">
+              <img src="images/piscina0.png" alt="Piscina infantil do clube" loading="lazy" />
+              <figcaption>Op&ccedil;&atilde;o recreativa para crian&ccedil;as.</figcaption>
+            </figure>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
