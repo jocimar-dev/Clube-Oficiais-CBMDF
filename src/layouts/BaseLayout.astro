@@ -23,6 +23,9 @@ const { title, description = "" } = Astro.props;
     <link rel="stylesheet" href="/styles.css?v=20260304-2" />
   </head>
   <body>
+    <div class="site-construction-banner" role="status" aria-live="polite">
+      Site em constru&ccedil;&atilde;o: estamos atualizando conte&uacute;dos e informa&ccedil;&otilde;es.
+    </div>
     <slot />
     <script is:inline src="/app.js?v=20260304-2"></script>
   </body>
