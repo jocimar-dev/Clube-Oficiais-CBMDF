@@ -795,6 +795,14 @@ img {
   object-fit: cover;
 }
 
+.legacy-banner__img--lower {
+  object-position: center 78%;
+}
+
+.legacy-banner__img--field {
+  object-position: center 50%;
+}
+
 .legacy-banner__caption {
   position: absolute;
   left: 12px;
