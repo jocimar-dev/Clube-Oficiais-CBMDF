@@ -9,11 +9,7 @@ import Footer from "../components/Footer.astro";
   <main class="main-content">
     <div class="container">
       <section class="page-section">
-        <h1 class="page-title">Seu clube, sua casa.</h1>
-        <p class="page-subtitle">Estrutura completa para lazer, esporte e convivio da familia bombeiro militar.</p>
-      </section>
-      <section class="page-section">
-        <h2 class="page-title">Nossa Estrutura</h2>
+        <h2 class="page-title"><a class="page-title-link" href="estrutura.html">Nossa Estrutura</a></h2>
         <p class="page-subtitle">Destaques de estrutura, lazer e programacao social do clube.</p>
         <div class="legacy-banner" data-banner-slider>
           <div class="legacy-banner__viewport">
@@ -30,21 +26,49 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
       </section>
-      <section class="page-section legacy-split">
-        <div>
-          <h2 class="page-title">Informativos</h2>
-          <div class="section-divider"></div>
-          <div class="legacy-grid legacy-grid--2">
-            <article class="legacy-card"><div class="legacy-card__head">Informativo Setembro</div><div class="legacy-card__body"><p>Resumo das acoes institucionais e agenda de atividades do clube.</p><p><a href="noticias.html">Visualizar publicacao</a></p></div></article>
-            <article class="legacy-card"><div class="legacy-card__head">Informativo Maio</div><div class="legacy-card__body"><p>Atualizacoes sobre eventos, melhorias e orientacoes aos associados.</p><p><a href="noticias.html">Visualizar publicacao</a></p></div></article>
+      <section class="page-section home-hero">
+        <div class="home-hero__content">
+          <p class="home-hero__kicker">Clube dos Oficiais CBMDF</p>
+          <h1 class="page-title">Portal Institucional do Clube dos Oficiais do CBMDF</h1>
+          <p class="page-subtitle">Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal.</p>
+          <div class="info-banner">Espa&ccedil;o institucional para esporte, lazer e atividades sociais dos associados.</div>
+          <ul class="home-hero__bullets">
+            <li>Ambiente familiar e seguro</li>
+            <li>Programa&ccedil;&atilde;o social durante o ano</li>
+            <li>Estrutura para atividades esportivas</li>
+          </ul>
+          <div class="home-hero__actions">
+            <a class="legacy-doc__button" href="associe-se.html">Quero me associar</a>
+            <a class="legacy-doc__button" href="diretoria.html">Ver Diretoria 2026/2027</a>
           </div>
         </div>
-        <aside>
-          <article class="legacy-card"><div class="legacy-card__head">Links uteis</div><div class="legacy-card__body"><ul class="legacy-link-list"><li><a href="https://www.cbm.df.gov.br/" target="_blank" rel="noopener noreferrer">Corpo de Bombeiros</a></li><li><a href="https://www.assofbm.org.br/" target="_blank" rel="noopener noreferrer">ASSOFBM-DF</a></li><li><a href="institucional.html">Institucional</a></li><li><a href="transparencia.html#ano-2024">Transparencia</a></li></ul></div></article>
+        <aside class="home-hero__aside">
+          <figure class="home-hero__media">
+            <img src="images/entrada-clube.jpg" alt="Entrada do Clube dos Oficiais CBMDF" loading="lazy" />
+            <figcaption>Patrim&ocirc;nio institucional da oficialidade bombeiro militar.</figcaption>
+          </figure>
+          <article class="legacy-card home-fire-card">
+            <div class="legacy-card__head">Esp&iacute;rito de Corpora&ccedil;&atilde;o</div>
+            <div class="legacy-card__body">
+              <p>Compromisso com unidade, respeito e valoriza&ccedil;&atilde;o da nossa hist&oacute;ria institucional.</p>
+            </div>
+          </article>
         </aside>
+      </section>
+      <section class="page-section home-services">
+        <h2 class="page-title">Servi&ccedil;os do Associado</h2>
+        <p class="page-subtitle">Acesso r&aacute;pido aos principais servi&ccedil;os e informa&ccedil;&otilde;es do clube.</p>
+        <div class="section-divider"></div>
+        <div class="legacy-grid legacy-grid--3 home-services__grid">
+          <article class="legacy-card home-services__card"><div class="legacy-card__head">Associe-se</div><div class="legacy-card__body"><p>Formularios e orientacoes para ingresso no quadro de associados.</p><p><a href="associe-se.html">Acessar pagina</a></p></div></article>
+          <article class="legacy-card home-services__card"><div class="legacy-card__head">Diretoria</div><div class="legacy-card__body"><p>Composicao oficial da gestao COCBMDF 2026/2027.</p><p><a href="diretoria.html">Acessar pagina</a></p></div></article>
+          <article class="legacy-card home-services__card"><div class="legacy-card__head">Informativos</div><div class="legacy-card__body"><p>Publicacoes institucionais e comunicados do clube.</p><p><a href="noticias.html">Acessar pagina</a></p></div></article>
+          <article class="legacy-card home-services__card"><div class="legacy-card__head">Beneficios e Convenios</div><div class="legacy-card__body"><p>Parcerias e vantagens para associados e dependentes.</p><p><a href="conheca-clube.html">Acessar pagina</a></p></div></article>
+          <article class="legacy-card home-services__card"><div class="legacy-card__head">Horarios</div><div class="legacy-card__body"><p>Funcionamento do clube e atendimento da secretaria.</p><p><a href="horarios.html">Acessar pagina</a></p></div></article>
+          <article class="legacy-card home-services__card"><div class="legacy-card__head">Contatos</div><div class="legacy-card__body"><p>Telefone, WhatsApp e canais institucionais oficiais.</p><p><a href="contatos.html">Acessar pagina</a></p></div></article>
+        </div>
       </section>
     </div>
   </main>
   <Footer />
 </BaseLayout>
-
