@@ -1,10 +1,71 @@
 ---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
 interface Props {
   title: string;
   description?: string;
+  canonical?: string;
+  ogImage?: string;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, description = "" } = Astro.props;
+const {
+  title,
+  description = "",
+  canonical,
+  ogImage = "/images/entrada-clube.jpg",
+  schema,
+  breadcrumbs = [],
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://clubedosoficiaiscbmdf.com.br");
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, site).toString();
+const ogImageUrl = new URL(ogImage, site).toString();
+const pageTitle = title.includes("Clube dos Oficiais CBMDF")
+  ? title
+  : `${title} | Clube dos Oficiais CBMDF`;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${site.toString()}#organization`,
+  name: "Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal",
+  alternateName: "Clube dos Oficiais CBMDF",
+  url: site.toString(),
+  logo: new URL("/images/brasao-oficiais.jpg", site).toString(),
+  email: "cocbmdf@uol.com.br",
+  telephone: "+55-61-3224-6041",
+  sameAs: ["https://wa.me/5561986257009"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "SCES Trecho 2 Lote 02/35",
+    addressLocality: "Brasilia",
+    addressRegion: "DF",
+    postalCode: "70200-002",
+    addressCountry: "BR",
+  },
+};
+
+const breadcrumbSchema =
+  breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.label,
+          item: item.href ? new URL(item.href, site).toString() : canonicalUrl,
+        })),
+      }
+    : null;
+
+const pageSchemas = Array.isArray(schema) ? schema : schema ? [schema] : [];
+const structuredData = [organizationSchema, ...pageSchemas, ...(breadcrumbSchema ? [breadcrumbSchema] : [])];
 ---
 
 <!DOCTYPE html>
@@ -12,21 +73,56 @@ const { title, description = "" } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#a71f27" />
+    <meta property="og:site_name" content="Clube dos Oficiais CBMDF" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImageUrl} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
     <link rel="manifest" href="/images/site.webmanifest" />
     <link rel="shortcut icon" href="/images/favicon.ico" />
-    <meta name="theme-color" content="#4f85b2" />
-    <link rel="stylesheet" href="/styles.css?v=20260304-2" />
+    <link rel="stylesheet" href="/styles.css?v=20260313-2" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <div class="site-construction-banner" role="status" aria-live="polite">
       Site em constru&ccedil;&atilde;o: estamos atualizando conte&uacute;dos e informa&ccedil;&otilde;es.
     </div>
     <slot />
-    <script is:inline src="/app.js?v=20260304-2"></script>
+    <script>
+      import { inject, track } from "@vercel/analytics";
+
+      inject({
+        mode: import.meta.env.PROD ? "production" : "development",
+      });
+
+      const analyticsWindow = window as Window & {
+        trackVercelEvent?: (
+          name: string,
+          properties?: Record<string, string | number | boolean | null | undefined>,
+        ) => void;
+      };
+
+      analyticsWindow.trackVercelEvent = (
+        name: string,
+        properties: Record<string, string | number | boolean | null | undefined> = {},
+      ) => {
+        track(name, properties);
+      };
+    </script>
+    <script is:inline src="/app.js?v=20260313-2"></script>
   </body>
 </html>

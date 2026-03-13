@@ -1,33 +1,80 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Institucional", href: "institucional.html" },
+  { label: "Historia" },
+];
+
+const timeline = [
+  {
+    period: "1989",
+    title: "Fundacao institucional",
+    description:
+      "O clube foi criado em 02 de dezembro de 1989, consolidando um espaco de integracao para a oficialidade bombeiro militar.",
+  },
+  {
+    period: "1991 a 1999",
+    title: "Primeiras gestoes registradas",
+    description:
+      "A fase inicial de presidencias estruturou a base institucional e fortaleceu a presenca do clube junto aos associados.",
+  },
+  {
+    period: "2000 a 2017",
+    title: "Consolidacao administrativa",
+    description:
+      "A sucessao de gestoes ampliou a organizacao interna, os servicos e a agenda de convivencia social e esportiva.",
+  },
+  {
+    period: "2018 a 2027",
+    title: "Atualizacao de governanca e portal",
+    description:
+      "O ciclo recente reforca a publicacao institucional, a apresentacao da diretoria e a organizacao digital de documentos e informativos.",
+  },
+];
 ---
 
-<BaseLayout title="Hist&oacute;ria | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Historia"
+  description="Historia do Clube dos Oficiais CBMDF com linha do tempo institucional e registro de presidencias."
+  breadcrumbs={breadcrumbs}
+>
   <Header />
-  <div class="container breadcrumb-wrap">
-    <nav class="breadcrumb" aria-label="Trilha de navegacao">
-      <span>Voc&ecirc; est&aacute; aqui:</span>
-      <a href="index.html">In&iacute;cio</a>
-      <span>/</span>
-      <span>Institucional</span>
-      <span>/</span>
-      <span>Hist&oacute;ria</span>
-    </nav>
-  </div>
+  <Breadcrumb items={breadcrumbs} />
   <main class="main-content">
     <div class="container">
       <section class="page-section">
-        <h1 class="page-title">Hist&oacute;ria do Clube</h1>
-        <div class="section-divider"></div>
-        <p>O Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal foi criado em 02 de dezembro de 1989, conforme registros institucionais da epoca.</p>
-        <p style="margin-top:12px;">A instituicao nasceu para integrar a familia bombeiro militar, oferecer estrutura de lazer e fortalecer a representacao social dos oficiais.</p>
-        <p style="margin-top:12px;">Ao longo dos anos, o clube consolidou seu papel com acoes de transparencia e ampliacao de beneficios.</p>
-        <div class="legacy-table-wrap" style="margin-top:20px;">
-          <div class="legacy-table-title">Presidentes do Clube (hist&oacute;rico)</div>
+        <SectionHeader
+          title="Historia do Clube"
+          level="h1"
+          subtitle="Linha do tempo institucional, marco de fundacao e registro de presidencias historicas."
+        />
+        <div class="history-timeline">
+          {timeline.map((item) => (
+            <article class="history-timeline__item">
+              <p class="history-timeline__period">{item.period}</p>
+              <div class="history-timeline__content">
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="legacy-table-wrap history-table">
+          <div class="legacy-table-title">Presidentes do Clube (historico)</div>
           <table class="legacy-table">
-            <thead><tr><th>Posto</th><th>Nome</th><th>Ano</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Posto</th>
+                <th>Nome</th>
+                <th>Ano</th>
+              </tr>
+            </thead>
             <tbody>
               <tr><td>TC QOBM/Comb.</td><td>Luiz Carlos Serafim Silva</td><td>1991 a 1991</td></tr>
               <tr><td>TC QOBM/Comb.</td><td>Benjamim Ferreira Bispo</td><td>1992 a 1997</td></tr>

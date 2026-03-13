@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatMonthYear } from "../data/content-utils";
+
+interface Props {
+  entry: CollectionEntry<"news">;
+  compact?: boolean;
+  filterValue?: string;
+}
+
+const { entry, compact = false, filterValue } = Astro.props;
+const yearFilter = filterValue ?? String(entry.data.publishedAt.getFullYear());
+---
+
+<article
+  class:list={["legacy-card", "news-card", compact && "news-card--compact"]}
+  data-news-card
+  data-news-year={yearFilter}
+  data-news-title={entry.data.title.toLowerCase()}
+  data-news-summary={entry.data.summary.toLowerCase()}
+>
+  <div class="legacy-card__head">{entry.data.title}</div>
+  <div class="legacy-card__body">
+    <p>{entry.data.summary}</p>
+    <p class="legacy-card__meta">Publicado em {formatMonthYear(entry.data.publishedAt)}</p>
+    <div class="news-card__actions">
+      <a href={`/noticias/${entry.slug}.html`}>Ler detalhes</a>
+      {entry.data.pdfUrl && (
+        <a href={entry.data.pdfUrl} target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+      )}
+    </div>
+  </div>
+</article>

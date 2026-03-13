@@ -1,0 +1,119 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTAGroup from "../../components/CTAGroup.astro";
+import DocumentCard from "../../components/DocumentCard.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { documentCategoryLabel } from "../../data/content-utils";
+import { contact } from "../../data/site";
+
+export async function getStaticPaths() {
+  const documents = await getCollection("documents");
+
+  return documents.map((entry: CollectionEntry<"documents">) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"documents">;
+}
+
+const { entry } = Astro.props;
+const relatedDocuments: CollectionEntry<"documents">[] = (await getCollection("documents"))
+  .filter(
+    (document: CollectionEntry<"documents">) =>
+      document.data.category === entry.data.category && document.id !== entry.id,
+  )
+  .slice(0, 2);
+
+const breadcrumbs = [
+  { label: "Inicio", href: "/index.html" },
+  { label: "Institucional", href: "/institucional.html" },
+  { label: "Regulamentos", href: "/regulamentos.html" },
+  { label: entry.data.title },
+];
+
+const documentSchema = {
+  "@context": "https://schema.org",
+  "@type": "DigitalDocument",
+  name: entry.data.title,
+  description: entry.data.summary,
+  url: `https://clubedosoficiaiscbmdf.com.br${entry.data.file}`,
+  encodingFormat: entry.data.file.endsWith(".pdf") ? "application/pdf" : "application/msword",
+};
+
+const categoryGuidance = {
+  regulation:
+    "Documento de referencia institucional para consulta e acompanhamento das normas publicadas no portal.",
+  membership:
+    "Documento direcionado ao processo de associacao, com uso recomendado em conjunto com a orientacao da secretaria.",
+  newsletter:
+    "Publicacao institucional destinada ao acompanhamento de comunicados, agenda e registros do clube.",
+};
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  breadcrumbs={breadcrumbs}
+  schema={documentSchema}
+>
+  <Header />
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section document-detail">
+        <SectionHeader title={entry.data.title} level="h1" subtitle={entry.data.summary} />
+        <div class="legacy-split document-detail__hero">
+          <article class="legacy-highlight">
+            <div class="legacy-highlight__title">{documentCategoryLabel(entry.data.category)}</div>
+            <p>{categoryGuidance[entry.data.category]}</p>
+            <ul class="legacy-line-list legacy-line-list--compact">
+              <li><strong>Tipo:</strong> {entry.data.documentType}</li>
+              <li><strong>Publico:</strong> {entry.data.audience}</li>
+              {entry.data.issuedAt && <li><strong>Data de referencia:</strong> {entry.data.issuedAt}</li>}
+            </ul>
+            <div class="document-detail__actions">
+              <CTAGroup
+                primary={{ href: entry.data.file, label: entry.data.ctaLabel ?? "Visualizar documento" }}
+                secondary={{ href: contact.whatsappHref, label: "Falar com a secretaria" }}
+              />
+            </div>
+          </article>
+          <article class="legacy-card">
+            <div class="legacy-card__head">Uso e orientacao</div>
+            <div class="legacy-card__body">
+              <p>Consulte esta pagina para contexto institucional e utilize o arquivo oficial para leitura integral.</p>
+              <p>
+                Em caso de duvida sobre aplicacao, validade ou encaminhamento, procure a secretaria pelos canais
+                institucionais do clube.
+              </p>
+              <p><a href="/regulamentos.html">Voltar para o repositorio de documentos</a></p>
+            </div>
+          </article>
+        </div>
+
+        {relatedDocuments.length > 0 && (
+          <>
+            <SectionHeader
+              title="Documentos relacionados"
+              subtitle="Outros arquivos publicados na mesma categoria para consulta complementar."
+              className="section-header--compact"
+            />
+            <div class="legacy-doc-grid">
+              {relatedDocuments.map((document: CollectionEntry<"documents">) => (
+                <DocumentCard entry={document} action={document.data.category === "membership" ? "download" : "open"} />
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

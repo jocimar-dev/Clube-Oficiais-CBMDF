@@ -1,0 +1,39 @@
+---
+interface LinkAction {
+  href: string;
+  label: string;
+  trackingName?: string;
+  trackingLocation?: string;
+}
+
+interface Props {
+  primary: LinkAction;
+  secondary?: LinkAction;
+  className?: string;
+}
+
+const { primary, secondary, className = "" } = Astro.props;
+---
+
+<div class:list={["cta-group", className]}>
+  <a
+    class="legacy-doc__button legacy-doc__button--accent"
+    href={primary.href}
+    data-track-click={primary.trackingName}
+    data-track-label={primary.label}
+    data-track-location={primary.trackingLocation}
+  >
+    {primary.label}
+  </a>
+  {secondary && (
+    <a
+      class="legacy-doc__button legacy-doc__button--ghost"
+      href={secondary.href}
+      data-track-click={secondary.trackingName}
+      data-track-label={secondary.label}
+      data-track-location={secondary.trackingLocation}
+    >
+      {secondary.label}
+    </a>
+  )}
+</div>

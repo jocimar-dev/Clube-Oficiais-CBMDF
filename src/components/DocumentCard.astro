@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { documentCategoryLabel } from "../data/content-utils";
+
+interface Props {
+  entry: CollectionEntry<"documents">;
+  action?: "open" | "download";
+  showDetailLink?: boolean;
+}
+
+const { entry, action = "open", showDetailLink = true } = Astro.props;
+const { id, data } = entry;
+const { title, documentType, summary, file, audience, issuedAt, ctaLabel, category } = data;
+const linkLabel = ctaLabel ?? (action === "download" ? "Baixar arquivo" : "Visualizar documento");
+---
+
+<article
+  class="legacy-doc"
+  data-document-card
+  data-document-category={category}
+  data-document-title={title.toLowerCase()}
+  data-document-summary={summary.toLowerCase()}
+  data-document-type={documentType.toLowerCase()}
+  data-document-audience={audience.toLowerCase()}
+>
+  <div class="legacy-doc__title">{title}</div>
+  <div class="legacy-doc__body">
+    <p>{summary}</p>
+    <p class="legacy-doc__meta">
+      <strong>Categoria:</strong> {documentCategoryLabel(category)}
+    </p>
+    <p class="legacy-doc__meta">
+      <strong>Tipo:</strong> {documentType}
+      {issuedAt && <> | <strong>Data:</strong> {issuedAt}</>}
+    </p>
+    <p class="legacy-doc__meta">
+      <strong>P&uacute;blico:</strong> {audience}
+    </p>
+    <div class="legacy-doc__actions">
+      {showDetailLink && (
+        <a class="legacy-doc__button legacy-doc__button--ghost" href={`/regulamentos/${id}.html`}>
+          Ver detalhes
+        </a>
+      )}
+      <a
+        class="legacy-doc__button"
+        href={file}
+        target={action === "open" ? "_blank" : undefined}
+        rel={action === "open" ? "noopener noreferrer" : undefined}
+        download={action === "download" ? true : undefined}
+        data-track-click="document_access"
+        data-track-label={title}
+        data-track-location={action === "download" ? "document-download" : "document-open"}
+        data-track-category={category}
+      >
+        {linkLabel}
+      </a>
+    </div>
+  </div>
+</article>

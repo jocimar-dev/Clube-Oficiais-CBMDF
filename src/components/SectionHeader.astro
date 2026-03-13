@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  level?: "h1" | "h2" | "h3";
+  linkHref?: string;
+  className?: string;
+}
+
+const {
+  title,
+  subtitle,
+  level = "h2",
+  linkHref,
+  className = "",
+} = Astro.props;
+
+const Tag = level;
+---
+
+<div class:list={["section-header", className]}>
+  <Tag class="page-title">
+    {linkHref ? <a class="page-title-link" href={linkHref}>{title}</a> : title}
+  </Tag>
+  {subtitle && <p class="page-subtitle">{subtitle}</p>}
+  <div class="section-divider"></div>
+</div>

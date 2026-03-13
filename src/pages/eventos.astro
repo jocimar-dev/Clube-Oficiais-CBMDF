@@ -1,0 +1,122 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import CTAGroup from "../components/CTAGroup.astro";
+import EventCard from "../components/EventCard.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact } from "../data/site";
+import { isUpcomingEvent } from "../data/content-utils";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Eventos" },
+];
+
+const allEvents: CollectionEntry<"events">[] = (await getCollection("events")).sort(
+  (a: CollectionEntry<"events">, b: CollectionEntry<"events">) =>
+    a.data.startDate.valueOf() - b.data.startDate.valueOf(),
+);
+
+const upcomingEvents = allEvents.filter((entry: CollectionEntry<"events">) => isUpcomingEvent(entry));
+const pastEvents = allEvents.filter((entry: CollectionEntry<"events">) => !isUpcomingEvent(entry)).reverse();
+
+const eventsSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Eventos | Clube dos Oficiais CBMDF",
+  description: "Agenda institucional e registros de eventos do Clube dos Oficiais CBMDF.",
+};
+---
+
+<BaseLayout
+  title="Eventos"
+  description="Agenda institucional, eventos sociais e registros comemorativos do Clube dos Oficiais CBMDF."
+  breadcrumbs={breadcrumbs}
+  schema={eventsSchema}
+>
+  <Header />
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Eventos"
+          level="h1"
+          subtitle="Agenda institucional e registros publicados das atividades sociais, comemorativas e culturais do clube."
+        />
+        <div class="legacy-split events-page__hero">
+          <article class="legacy-highlight">
+            <div class="legacy-highlight__title">Agenda institucional</div>
+            <p>
+              Esta pagina concentra eventos publicados no portal, com separacao entre programacoes futuras e registros
+              ja realizados.
+            </p>
+            <div class="events-page__actions">
+              <CTAGroup
+                primary={{ href: contact.whatsappHref, label: "Confirmar programacao" }}
+                secondary={{ href: "noticias.html", label: "Ver informativos" }}
+              />
+            </div>
+          </article>
+          <article class="legacy-card">
+            <div class="legacy-card__head">Orientacao ao associado</div>
+            <div class="legacy-card__body">
+              <p>Programacoes futuras podem ser confirmadas diretamente com a secretaria pelos canais oficiais.</p>
+              <p>Registros passados permanecem publicados como memoria institucional e referencia de agenda.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="collection-toolbar" data-event-filters>
+          <label class="collection-toolbar__search">
+            <span class="is-hidden">Buscar evento</span>
+            <input type="search" placeholder="Buscar por titulo, resumo ou local" data-event-search />
+          </label>
+          <div class="collection-toolbar__chips" aria-label="Filtrar eventos">
+            <button type="button" class="is-active" data-event-filter="all">Todos</button>
+            <button type="button" data-event-filter="upcoming">Programacao futura</button>
+            <button type="button" data-event-filter="past">Registros publicados</button>
+            <button type="button" data-event-filter="comemorativo">Comemorativos</button>
+            <button type="button" data-event-filter="social">Sociais</button>
+          </div>
+        </div>
+
+        <div data-event-section>
+          <SectionHeader
+            title="Programacao futura"
+            subtitle="Eventos com data igual ou posterior a hoje, conforme publicacao oficial no portal."
+            className="section-header--compact"
+          />
+          {upcomingEvents.length > 0 ? (
+            <div class="legacy-grid legacy-grid--2" data-event-section-body>
+              {upcomingEvents.map((entry: CollectionEntry<"events">) => <EventCard entry={entry} state="upcoming" />)}
+            </div>
+          ) : (
+            <article class="legacy-card" data-event-empty-state>
+              <div class="legacy-card__head">Agenda em atualizacao</div>
+              <div class="legacy-card__body">
+                <p>Nao ha eventos futuros publicados neste momento.</p>
+                <p>Para confirmar programacoes e receber orientacoes, fale com a secretaria pelos canais oficiais.</p>
+              </div>
+            </article>
+          )}
+        </div>
+
+        <div data-event-section>
+          <SectionHeader
+            title="Registros publicados"
+            subtitle="Eventos, comunicados e acoes institucionais ja realizados ou divulgados em ciclos anteriores."
+            className="section-header--compact"
+          />
+          <div class="legacy-grid legacy-grid--2" data-event-section-body>
+            {pastEvents.map((entry: CollectionEntry<"events">) => <EventCard entry={entry} state="past" />)}
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

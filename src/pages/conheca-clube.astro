@@ -1,34 +1,66 @@
-﻿---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+---
+import Breadcrumb from "../components/Breadcrumb.astro";
+import CTAGroup from "../components/CTAGroup.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact, membershipBenefits } from "../data/site";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Institucional", href: "institucional.html" },
+  { label: "Beneficios e Convenios" },
+];
 ---
 
-<BaseLayout title="Benef&iacute;cios e Conv&ecirc;nios | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Beneficios e Convenios"
+  description="Beneficios, estrutura de apoio e convenios institucionais para associados do Clube dos Oficiais CBMDF."
+  breadcrumbs={breadcrumbs}
+>
   <Header />
-<div class="container breadcrumb-wrap">
-  <nav class="breadcrumb" aria-label="Trilha de navegacao">
-    <span>Voc&ecirc; est&aacute; aqui:</span>
-    <a href="index.html">In&iacute;cio</a>
-    <span>/</span>
-    <span>Institucional</span>
-    <span>/</span>
-    <span>Benef&iacute;cios e Conv&ecirc;nios</span>
-  </nav>
-</div>
-<main class="main-content">
-  <div class="container">
-    <section class="page-section">
-      <h1 class="page-title">Benef&iacute;cios e Conv&ecirc;nios</h1>
-      <p class="page-subtitle">Conteudo consolidado de beneficios e convenios institucionais.</p>
-      <div class="section-divider"></div>
-      <div class="legacy-grid legacy-grid--2">
-        <article class="legacy-card"><div class="legacy-card__head">Beneficios</div><div class="legacy-card__body"><p>Acesso a eventos, programacao social, agenda esportiva e servicos para associados.</p></div></article>
-        <article class="legacy-card"><div class="legacy-card__head">Convenios</div><div class="legacy-card__body"><p>Parcerias em saude, educacao e bem-estar para socios e dependentes.</p><ul><li>Clinica Essencial</li><li>Academia Vital</li><li>Universidade Leste</li><li>Colegio Horizonte Azul</li></ul></div></article>
-      </div>
-    </section>
-  </div>
-</main>
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Beneficios e Convenios"
+          level="h1"
+          subtitle="Vantagens institucionais, convivencia social e parcerias de apoio ao associado."
+        />
+        <div class="legacy-grid legacy-grid--2 home-benefits__grid">
+          {membershipBenefits.map((benefit) => (
+            <article class="legacy-card home-benefits__card">
+              <div class="legacy-card__head">{benefit.title}</div>
+              <div class="legacy-card__body">
+                <p>{benefit.description}</p>
+              </div>
+            </article>
+          ))}
+          <article class="legacy-card">
+            <div class="legacy-card__head">Convenios institucionais</div>
+            <div class="legacy-card__body">
+              <p>Parcerias em saude, educacao e bem-estar poderao ser divulgadas conforme formalizacao institucional.</p>
+              <p>A secretaria informa a disponibilidade e orienta o associado sobre os beneficios vigentes.</p>
+            </div>
+          </article>
+          <article class="legacy-card">
+            <div class="legacy-card__head">Atendimento para associados</div>
+            <div class="legacy-card__body">
+              <p>Contato direto para associacao, agenda, orientacoes de uso e esclarecimentos institucionais.</p>
+              <p><a href="contatos.html">Abrir contatos</a></p>
+            </div>
+          </article>
+        </div>
+        <div class="associe-page__cta">
+          <CTAGroup
+            primary={{ href: "associe-se.html", label: "Iniciar associacao" }}
+            secondary={{ href: contact.whatsappHref, label: "Consultar a secretaria" }}
+          />
+        </div>
+      </section>
+    </div>
+  </main>
   <Footer />
 </BaseLayout>
-

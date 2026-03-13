@@ -1,30 +1,57 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import NewsCard from "../components/NewsCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Noticias" },
+];
+
+const news: CollectionEntry<"news">[] = (await getCollection("news")).sort(
+  (a: CollectionEntry<"news">, b: CollectionEntry<"news">) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
 ---
 
-<BaseLayout title="Not&iacute;cias | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Noticias"
+  description="Informativos, comunicados institucionais e publicacoes recentes do Clube dos Oficiais CBMDF."
+  breadcrumbs={breadcrumbs}
+>
   <Header />
-  <div class="container breadcrumb-wrap">
-    <nav class="breadcrumb" aria-label="Trilha de navegacao">
-      <span>Voc&ecirc; est&aacute; aqui:</span>
-      <a href="index.html">In&iacute;cio</a>
-      <span>/</span>
-      <span>Not&iacute;cias</span>
-    </nav>
-  </div>
+  <Breadcrumb items={breadcrumbs} />
   <main class="main-content">
     <div class="container">
       <section class="page-section">
-        <h1 class="page-title">Not&iacute;cias</h1>
-        <p class="page-subtitle">Comunicados institucionais, agenda e informativos do clube.</p>
-        <div class="section-divider"></div>
+        <SectionHeader
+          title="Noticias"
+          level="h1"
+          subtitle="Comunicados institucionais, agenda e informativos do clube organizados por publicacao."
+        />
+        <div class="collection-toolbar" data-news-filters>
+          <label class="collection-toolbar__search">
+            <span class="is-hidden">Buscar noticia</span>
+            <input type="search" placeholder="Buscar por titulo ou resumo" data-news-search />
+          </label>
+          <div class="collection-toolbar__chips" aria-label="Filtrar noticias por ano">
+            <button type="button" class="is-active" data-news-filter="all">Todas</button>
+            <button type="button" data-news-filter="2025">2025</button>
+            <button type="button" data-news-filter="2024">2024</button>
+          </div>
+        </div>
         <div class="legacy-grid legacy-grid--2">
-          <article class="legacy-card"><div class="legacy-card__head">Informativo - Edi&ccedil;&atilde;o 1</div><div class="legacy-card__body"><p>Primeira edi&ccedil;&atilde;o do informativo institucional disponibilizada em PDF.</p><p><a href="/docs/informativo-ed1-junho-2024.pdf" target="_blank" rel="noopener noreferrer">Abrir informativo (PDF)</a></p></div></article>
-          <article class="legacy-card"><div class="legacy-card__head">Informativo - Edi&ccedil;&atilde;o 2</div><div class="legacy-card__body"><p>Edi&ccedil;&atilde;o complementar com a&ccedil;&otilde;es e comunicados para associados.</p><p><a href="/docs/informativo-numero2.pdf" target="_blank" rel="noopener noreferrer">Abrir informativo (PDF)</a></p></div></article>
-          <article class="legacy-card"><div class="legacy-card__head">Informativo - Edi&ccedil;&atilde;o 3</div><div class="legacy-card__body"><p>Publica&ccedil;&atilde;o institucional com destaques de gest&atilde;o e atividades do clube.</p><p><a href="/docs/informativo-ed3-agosto-2025.pdf" target="_blank" rel="noopener noreferrer">Abrir informativo (PDF)</a></p></div></article>
-          <article class="legacy-card"><div class="legacy-card__head">Institucional</div><div class="legacy-card__body"><p>Acesse as paginas institucionais com historia, diretoria e regulamentos.</p><p><a href="institucional.html">Acessar pagina institucional</a></p></div></article>
+          {news.map((item: CollectionEntry<"news">) => <NewsCard entry={item} />)}
+          <article class="legacy-card">
+            <div class="legacy-card__head">Eventos e agenda</div>
+            <div class="legacy-card__body">
+              <p>Consulte registros de eventos, comunicados comemorativos e programacoes ja publicadas no portal.</p>
+              <p><a href="eventos.html">Abrir pagina de eventos</a></p>
+            </div>
+          </article>
         </div>
       </section>
     </div>

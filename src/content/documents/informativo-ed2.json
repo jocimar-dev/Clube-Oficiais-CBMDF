@@ -1,0 +1,11 @@
+{
+  "title": "Informativo - Edicao 2",
+  "documentType": "Informativo institucional",
+  "file": "/docs/informativo-numero2.pdf",
+  "summary": "Edicao complementar com acoes e comunicados para associados.",
+  "audience": "Associados e publico institucional",
+  "featured": false,
+  "issuedAt": "Publicacao institucional",
+  "ctaLabel": "Visualizar documento",
+  "category": "newsletter"
+}

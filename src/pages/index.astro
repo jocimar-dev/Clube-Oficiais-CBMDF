@@ -1,23 +1,170 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import CTAGroup from "../components/CTAGroup.astro";
+import EventCard from "../components/EventCard.astro";
+import NewsCard from "../components/NewsCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import TrustStats from "../components/TrustStats.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact, homeTrustStats, membershipBenefits, trustSignals } from "../data/site";
+
+const events: CollectionEntry<"events">[] = (await getCollection("events")).sort(
+  (a: CollectionEntry<"events">, b: CollectionEntry<"events">) =>
+    a.data.sortOrder - b.data.sortOrder || a.data.startDate.valueOf() - b.data.startDate.valueOf(),
+);
+
+const news: CollectionEntry<"news">[] = (await getCollection("news"))
+  .sort((a: CollectionEntry<"news">, b: CollectionEntry<"news">) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
+
+const featuredDocuments: CollectionEntry<"documents">[] = (await getCollection("documents"))
+  .filter((entry: CollectionEntry<"documents">) => entry.data.featured)
+  .slice(0, 3);
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Clube dos Oficiais CBMDF",
+  url: "https://clubedosoficiaiscbmdf.com.br/",
+  inLanguage: "pt-BR",
+};
 ---
 
-<BaseLayout title="Home | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Portal Institucional"
+  description="Portal institucional do Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal, com associacao, documentos, estrutura, diretoria e informativos."
+  schema={homeSchema}
+>
   <Header />
   <main class="main-content">
     <div class="container">
+      <section class="page-section home-hero home-hero--institutional">
+        <div class="home-hero__content">
+          <p class="home-hero__kicker">Clube dos Oficiais CBMDF</p>
+          <h1 class="page-title">Portal Institucional do Clube dos Oficiais Corpo de Bombeiros Militar do Distrito Federal</h1>
+          <p class="page-subtitle">
+            Informacoes oficiais sobre associacao, diretoria, estrutura, documentos e agenda institucional do clube.
+          </p>
+          <div class="info-banner">
+            Espaco institucional para lazer, convivencia, programacao social e atendimento aos associados.
+          </div>
+          <ul class="home-hero__bullets">
+            <li>Atendimento por telefone, WhatsApp e e-mail institucional.</li>
+            <li>Documentacao de associacao e estatuto disponiveis no portal.</li>
+            <li>Gestao vigente publicada com cargos, nomes e colegiados.</li>
+          </ul>
+          <CTAGroup
+            className="home-hero__actions"
+            primary={{
+              href: "associe-se.html",
+              label: "Quero me associar",
+              trackingName: "associate_cta_click",
+              trackingLocation: "home-hero",
+            }}
+            secondary={{
+              href: contact.whatsappHref,
+              label: "Falar com a secretaria",
+              trackingName: "whatsapp_click",
+              trackingLocation: "home-hero",
+            }}
+          />
+        </div>
+        <aside class="home-hero__aside">
+          <figure class="home-hero__media">
+            <img src="images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="eager" />
+            <figcaption>Endereco oficial do complexo social e administrativo do clube.</figcaption>
+          </figure>
+          <article class="legacy-card home-fire-card">
+            <div class="legacy-card__head">Confianca institucional</div>
+            <div class="legacy-card__body">
+              <ul class="legacy-line-list legacy-line-list--compact">
+                {trustSignals.map((signal) => <li>{signal}</li>)}
+              </ul>
+            </div>
+          </article>
+        </aside>
+      </section>
+
       <section class="page-section">
-        <h2 class="page-title"><a class="page-title-link" href="estrutura.html">Nossa Estrutura</a></h2>
-        <p class="page-subtitle">Destaques de estrutura, lazer e programacao social do clube.</p>
+        <SectionHeader
+          title="Numeros do Clube"
+          subtitle="Indicadores publicados com base nas informacoes disponiveis no portal institucional."
+        />
+        <TrustStats items={homeTrustStats} />
+      </section>
+
+      <section class="page-section home-benefits">
+        <SectionHeader
+          title="Beneficios de ser associado"
+          subtitle="Valor institucional, lazer, programacao social e canais de atendimento em um fluxo mais claro."
+        />
+        <div class="legacy-grid legacy-grid--2 home-benefits__grid">
+          {membershipBenefits.map((benefit) => (
+            <article class="legacy-card home-benefits__card">
+              <div class="legacy-card__head">{benefit.title}</div>
+              <div class="legacy-card__body">
+                <p>{benefit.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="home-membership-flow">
+          <div class="home-membership-flow__intro">
+            <h3>Como ingressar</h3>
+            <p>Fluxo rapido para iniciar a associacao com documentos, formulario e atendimento direto da secretaria.</p>
+          </div>
+          <ol class="home-membership-flow__steps">
+            <li>Verifique os documentos exigidos e baixe os formularios.</li>
+            <li>Encaminhe a documentacao completa para a secretaria.</li>
+            <li>Acompanhe a orientacao institucional por WhatsApp ou e-mail.</li>
+          </ol>
+          <CTAGroup
+            primary={{
+              href: "associe-se.html",
+              label: "Abrir pagina de associacao",
+              trackingName: "associate_cta_click",
+              trackingLocation: "home-membership-flow",
+            }}
+            secondary={{
+              href: contact.emailHref,
+              label: "Solicitar orientacao por e-mail",
+              trackingName: "email_click",
+              trackingLocation: "home-membership-flow",
+            }}
+          />
+        </div>
+      </section>
+
+      <section class="page-section">
+        <SectionHeader
+          title="Nossa Estrutura"
+          subtitle="Destaques de estrutura, lazer e programacao social do clube."
+          linkHref="estrutura.html"
+        />
         <div class="legacy-banner" data-banner-slider>
           <div class="legacy-banner__viewport">
-            <article class="legacy-banner__slide is-active" data-banner-slide><img src="images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="lazy" /><p class="legacy-banner__caption">Entrada principal e acesso ao complexo social do clube.</p></article>
-            <article class="legacy-banner__slide" data-banner-slide><img src="images/banner-salao-social.jpg" alt="Area de churrasqueiras e espaco coberto do clube" loading="lazy" /><p class="legacy-banner__caption">Churrasqueiras e espa&ccedil;o coberto para confraterniza&ccedil;&atilde;o dos associados.</p></article>
-            <article class="legacy-banner__slide" data-banner-slide><img class="legacy-banner__img--field" src="images/banner-campo-futebol-v3.jpg" alt="Campo de futebol do Clube dos Oficiais CBMDF" loading="lazy" /><p class="legacy-banner__caption">Campo de futebol para atividades esportivas e recreativas dos associados.</p></article>
-            <article class="legacy-banner__slide" data-banner-slide><img class="legacy-banner__img--lower" src="images/banner-piscina.jpg" alt="Piscina do Clube dos Oficiais CBMDF" loading="lazy" /><p class="legacy-banner__caption">Piscina social e area de descanso para lazer da familia bombeiro militar.</p></article>
-            <article class="legacy-banner__slide" data-banner-slide><img src="images/banner-area-verde.jpg" alt="Area de convivio e lazer do clube" loading="lazy" /><p class="legacy-banner__caption">Ambiente de conviv&ecirc;ncia e lazer para integra&ccedil;&atilde;o da fam&iacute;lia bombeiro militar.</p></article>
+            <article class="legacy-banner__slide is-active" data-banner-slide>
+              <img src="images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="lazy" />
+              <p class="legacy-banner__caption">Entrada principal e acesso ao complexo social do clube.</p>
+            </article>
+            <article class="legacy-banner__slide" data-banner-slide>
+              <img src="images/banner-salao-social.jpg" alt="Area de churrasqueiras e espaco coberto do clube" loading="lazy" />
+              <p class="legacy-banner__caption">Churrasqueiras e espaco coberto para confraternizacao dos associados.</p>
+            </article>
+            <article class="legacy-banner__slide" data-banner-slide>
+              <img class="legacy-banner__img--field" src="images/banner-campo-futebol-v3.jpg" alt="Campo de futebol do Clube dos Oficiais CBMDF" loading="lazy" />
+              <p class="legacy-banner__caption">Campo esportivo para atividades recreativas e encontros entre associados.</p>
+            </article>
+            <article class="legacy-banner__slide" data-banner-slide>
+              <img class="legacy-banner__img--lower" src="images/banner-piscina.jpg" alt="Piscina do Clube dos Oficiais CBMDF" loading="lazy" />
+              <p class="legacy-banner__caption">Piscina social e area de descanso para lazer da familia bombeiro militar.</p>
+            </article>
+            <article class="legacy-banner__slide" data-banner-slide>
+              <img src="images/banner-area-verde.jpg" alt="Area de convivio e lazer do clube" loading="lazy" />
+              <p class="legacy-banner__caption">Ambiente de convivio para integracao institucional e eventos sociais.</p>
+            </article>
           </div>
           <div class="legacy-banner__dots" aria-label="Controle do banner">
             <button type="button" data-banner-dot class="is-active" aria-label="Banner 1" aria-pressed="true"></button>
@@ -28,73 +175,75 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
       </section>
-      <section class="page-section home-hero">
-        <div class="home-hero__content">
-          <p class="home-hero__kicker">Clube dos Oficiais CBMDF</p>
-          <h1 class="page-title">Portal Institucional do Clube dos Oficiais do CBMDF</h1>
-          <p class="page-subtitle">Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal.</p>
-          <div class="info-banner">Espa&ccedil;o institucional para esporte, lazer e atividades sociais dos associados.</div>
-          <ul class="home-hero__bullets">
-            <li>Ambiente familiar e seguro</li>
-            <li>Programa&ccedil;&atilde;o social durante o ano</li>
-            <li>Estrutura para atividades esportivas</li>
-          </ul>
-          <div class="home-hero__actions">
-            <a class="legacy-doc__button" href="associe-se.html">Quero me associar</a>
-            <a class="legacy-doc__button" href="diretoria.html">Ver Diretoria 2026/2027</a>
+
+      <section class="page-section home-events">
+        <SectionHeader
+          title="Agenda e informativos"
+          subtitle="Eventos, comunicados e publicacoes recentes do clube em formato mais facil de consultar."
+        />
+        <div class="legacy-split home-updates">
+          <div>
+            <h3 class="home-updates__title">Eventos em destaque</h3>
+            <div class="legacy-grid legacy-grid--2 home-events__grid home-events__grid--compact">
+              {events.map((event: CollectionEntry<"events">) => <EventCard entry={event} compact />)}
+            </div>
+            <p class="home-updates__link"><a href="eventos.html">Abrir pagina de eventos</a></p>
+          </div>
+          <div class="home-updates__side">
+            <h3 class="home-updates__title">Informativos recentes</h3>
+            <div class="legacy-grid home-news__grid">
+              {news.map((item: CollectionEntry<"news">) => <NewsCard entry={item} compact />)}
+            </div>
+            <h3 class="home-updates__title">Documentos oficiais</h3>
+            <div class="legacy-grid home-documents__grid">
+              {featuredDocuments.map((document) => (
+                <article class="legacy-card">
+                  <div class="legacy-card__head">{document.data.title}</div>
+                  <div class="legacy-card__body">
+                    <p>{document.data.summary}</p>
+                    <p><a href={`/regulamentos/${document.id}.html`}>Ver detalhes do documento</a></p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
-        <aside class="home-hero__aside">
-          <figure class="home-hero__media">
-            <img src="images/entrada-clube.jpg" alt="Entrada do Clube dos Oficiais CBMDF" loading="lazy" />
-            <figcaption>Patrim&ocirc;nio institucional da oficialidade bombeiro militar.</figcaption>
-          </figure>
-          <article class="legacy-card home-fire-card">
-            <div class="legacy-card__head">Esp&iacute;rito de Corpora&ccedil;&atilde;o</div>
+      </section>
+
+      <section class="page-section home-access">
+        <SectionHeader
+          title="Acesso rapido para associados e interessados"
+          subtitle="Principais paginas para adesao, governanca, horarios e atendimento."
+        />
+        <div class="legacy-grid legacy-grid--4 home-access__grid">
+          <article class="legacy-card home-access__card">
+            <div class="legacy-card__head">Associe-se</div>
             <div class="legacy-card__body">
-              <p>Compromisso com unidade, respeito e valoriza&ccedil;&atilde;o da nossa hist&oacute;ria institucional.</p>
+              <p>Formularios, checklist documental e canais de contato para iniciar o processo.</p>
+              <p><a href="associe-se.html">Abrir pagina</a></p>
             </div>
           </article>
-        </aside>
-      </section>
-      <section class="page-section home-events">
-        <h2 class="page-title">Eventos</h2>
-        <p class="page-subtitle">Agenda de atividades sociais e comemorativas do clube.</p>
-        <div class="section-divider"></div>
-        <div class="legacy-grid legacy-grid--4 home-events__grid">
-          <article class="legacy-card home-events__card">
-            <div class="legacy-card__head">Dia do Bombeiro Militar</div>
-            <div class="home-events__media"><img src="images/evento-dia-bombeiro.png" alt="Arte do evento Dia do Bombeiro Militar" loading="lazy" /></div>
-            <div class="legacy-card__body"><p>Comemoracao institucional em homenagem aos soldados do fogo.</p></div>
+          <article class="legacy-card home-access__card">
+            <div class="legacy-card__head">Diretoria</div>
+            <div class="legacy-card__body">
+              <p>Gestao vigente, colegiados de governanca e quadro completo de dirigentes.</p>
+              <p><a href="diretoria.html">Abrir pagina</a></p>
+            </div>
           </article>
-          <article class="legacy-card home-events__card">
-            <div class="legacy-card__head">Dia das Crian&ccedil;as</div>
-            <div class="home-events__media"><img src="images/evento-dia-criancas.png" alt="Arte do evento Dia das Criancas" loading="lazy" /></div>
-            <div class="legacy-card__body"><p>Programacao infantil com brincadeiras e atividades para toda a familia.</p></div>
+          <article class="legacy-card home-access__card">
+            <div class="legacy-card__head">Regulamentos</div>
+            <div class="legacy-card__body">
+              <p>Estatuto, formularios, informativos e documentos oficiais em um unico local.</p>
+              <p><a href="regulamentos.html">Abrir pagina</a></p>
+            </div>
           </article>
-          <article class="legacy-card home-events__card">
-            <div class="legacy-card__head">Esse Forr&oacute; &eacute; Nosso</div>
-            <div class="home-events__media"><img src="images/evento-forro-nosso.png" alt="Arte do evento musical Esse Forro e Nosso" loading="lazy" /></div>
-            <div class="legacy-card__body"><p>Noite musical com atracoes culturais e convivencia social dos associados.</p></div>
+          <article class="legacy-card home-access__card">
+            <div class="legacy-card__head">Contatos</div>
+            <div class="legacy-card__body">
+              <p>Telefone, WhatsApp, e-mail institucional e horarios de atendimento da secretaria.</p>
+              <p><a href="contatos.html">Abrir pagina</a></p>
+            </div>
           </article>
-          <article class="legacy-card home-events__card">
-            <div class="legacy-card__head">Oficiais Promovidos</div>
-            <div class="home-events__media"><img src="images/evento-parabeniza-oficiais.png" alt="Arte institucional parabenizando oficiais promovidos" loading="lazy" /></div>
-            <div class="legacy-card__body"><p>Mensagem institucional em reconhecimento aos oficiais promovidos.</p></div>
-          </article>
-        </div>
-      </section>
-      <section class="page-section home-services">
-        <h2 class="page-title">Servi&ccedil;os do Associado</h2>
-        <p class="page-subtitle">Acesso r&aacute;pido aos principais servi&ccedil;os e informa&ccedil;&otilde;es do clube.</p>
-        <div class="section-divider"></div>
-        <div class="legacy-grid legacy-grid--3 home-services__grid">
-          <article class="legacy-card home-services__card"><div class="legacy-card__head">Associe-se</div><div class="legacy-card__body"><p>Formularios e orientacoes para ingresso no quadro de associados.</p><p><a href="associe-se.html">Acessar pagina</a></p></div></article>
-          <article class="legacy-card home-services__card"><div class="legacy-card__head">Diretoria</div><div class="legacy-card__body"><p>Composicao oficial da gestao COCBMDF 2026/2027.</p><p><a href="diretoria.html">Acessar pagina</a></p></div></article>
-          <article class="legacy-card home-services__card"><div class="legacy-card__head">Informativos</div><div class="legacy-card__body"><p>Publicacoes institucionais e comunicados do clube.</p><p><a href="noticias.html">Acessar pagina</a></p></div></article>
-          <article class="legacy-card home-services__card"><div class="legacy-card__head">Beneficios e Convenios</div><div class="legacy-card__body"><p>Parcerias e vantagens para associados e dependentes.</p><p><a href="conheca-clube.html">Acessar pagina</a></p></div></article>
-          <article class="legacy-card home-services__card"><div class="legacy-card__head">Horarios</div><div class="legacy-card__body"><p>Funcionamento do clube e atendimento da secretaria.</p><p><a href="horarios.html">Acessar pagina</a></p></div></article>
-          <article class="legacy-card home-services__card"><div class="legacy-card__head">Contatos</div><div class="legacy-card__body"><p>Telefone, WhatsApp e canais institucionais oficiais.</p><p><a href="contatos.html">Acessar pagina</a></p></div></article>
         </div>
       </section>
     </div>

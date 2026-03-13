@@ -1,0 +1,15 @@
+{
+  "title": "Dia do Bombeiro Militar",
+  "summary": "Comemoracao institucional em homenagem aos soldados do fogo e a historia da corporacao.",
+  "startDate": "2025-07-02",
+  "time": "Programacao institucional",
+  "location": "Clube dos Oficiais CBMDF",
+  "status": "comemorativo",
+  "cover": "/images/evento-dia-bombeiro.png",
+  "highlights": [
+    "Homenagem aos militares do fogo e a historia da corporacao.",
+    "Publicacao comemorativa com forte valor institucional.",
+    "Referencia para agenda de datas simbolicas do clube."
+  ],
+  "sortOrder": 1
+}

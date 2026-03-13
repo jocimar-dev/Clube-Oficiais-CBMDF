@@ -1,28 +1,85 @@
 <footer class="footer-legacy">
   <div class="container footer-legacy__inner">
     <div>
-      <h3>About</h3>
+      <h3>Institucional</h3>
       <ul>
-        <li><a href="institucional.html">Sobre</a></li>
-        <li><a href="contatos.html">Contatos</a></li>
-        <li><a href="regulamentos.html">Regulamentos</a></li>
+        <li><a href="historia.html">Historia</a></li>
+        <li><a href="diretoria.html">Diretoria</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="regulamentos.html">Documentos oficiais</a></li>
+        <li><a href="localizacao.html">Localizacao</a></li>
       </ul>
     </div>
     <div>
-      <h3>Fa&ccedil;a parte da nossa lista</h3>
-      <p>Inscreva-se para receber os informativos e comunicados diretamente na sua caixa de entrada.</p>
-      <form class="footer-newsletter" data-form>
-        <label for="newsletter-email" class="is-hidden">Digite seu e-mail</label>
-        <input id="newsletter-email" type="email" name="newsletter" placeholder="Entre com seu e-mail" required />
-        <button type="submit">Assinar</button>
+      <h3>Atendimento e adesao</h3>
+      <p>Para iniciar a associacao ou solicitar informativos, utilize os canais institucionais abaixo.</p>
+      <form
+        class="footer-request-form"
+        data-message-form
+        data-form-context="Solicitacao de informativos"
+        data-subject="Solicitacao de informativos - site do Clube dos Oficiais CBMDF"
+        data-intro="Ola, gostaria de receber informativos e comunicacoes do Clube dos Oficiais CBMDF."
+        data-email-target="cocbmdf@uol.com.br"
+        data-whatsapp-target="5561986257009"
+        aria-label="Formulario rapido para solicitar informativos"
+      >
+        <label>
+          <span class="is-hidden">Seu nome</span>
+          <input type="text" name="nome" data-label="Nome" placeholder="Seu nome" required />
+        </label>
+        <label>
+          <span class="is-hidden">Seu e-mail</span>
+          <input type="email" name="email" data-label="E-mail" placeholder="Seu e-mail" required />
+        </label>
+        <div class="footer-request-form__actions">
+          <button type="submit" class="footer-legacy__action footer-legacy__action--primary" data-message-channel="email">
+            Solicitar por e-mail
+          </button>
+          <button type="submit" class="footer-legacy__action" data-message-channel="whatsapp">
+            Solicitar no WhatsApp
+          </button>
+        </div>
+        <p class="footer-request-form__status" data-form-status role="status" aria-live="polite"></p>
       </form>
+      <div class="footer-legacy__actions">
+        <a
+          class="footer-legacy__action footer-legacy__action--primary"
+          href="associe-se.html"
+          data-track-click="associate_cta_click"
+          data-track-label="Quero me associar"
+          data-track-location="footer"
+        >
+          Quero me associar
+        </a>
+        <a
+          class="footer-legacy__action"
+          href="https://wa.me/5561986257009?text=Ola%2C%20gostaria%20de%20receber%20informacoes%20sobre%20associacao%20e%20informativos."
+          data-track-click="whatsapp_click"
+          data-track-label="Falar com a secretaria"
+          data-track-location="footer"
+        >
+          Falar com a secretaria
+        </a>
+        <a
+          class="footer-legacy__action"
+          href="mailto:cocbmdf@uol.com.br?subject=Receber%20informativos%20do%20Clube%20dos%20Oficiais%20CBMDF"
+          data-track-click="email_click"
+          data-track-label="Solicitar informativos por e-mail"
+          data-track-location="footer"
+        >
+          Solicitar informativos por e-mail
+        </a>
+      </div>
     </div>
     <div>
-      <h3>Contate-nos</h3>
-      <p>COCBM-DF</p><p>SCES Trecho 2 Lote 02/35</p><p>CEP: 70200-002</p><p>Brasilia, DF</p>
-      <p>(61) 3224-6041</p><p>(61) 98625-7009</p>
-      <p>cocbmdf@uol.com.br</p>
+      <h3>Contato oficial</h3>
+      <p>COCBM-DF</p>
+      <p>SCES Trecho 2 Lote 02/35</p>
+      <p>CEP: 70200-002</p>
+      <p>Brasilia, DF</p>
+      <p><a href="tel:+556132246041">(61) 3224-6041</a></p>
+      <p><a href="https://wa.me/5561986257009" target="_blank" rel="noopener noreferrer">(61) 98625-7009</a></p>
+      <p><a href="mailto:cocbmdf@uol.com.br">cocbmdf@uol.com.br</a></p>
     </div>
   </div>
 </footer>
-<div class="toast" role="status" aria-live="polite" data-toast></div>

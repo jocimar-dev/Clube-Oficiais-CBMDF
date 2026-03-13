@@ -1,72 +1,83 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import LeadershipTable from "../components/LeadershipTable.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import TrustStats from "../components/TrustStats.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Diretoria" },
+];
+
+const leadership: CollectionEntry<"leadership">[] = (await getCollection("leadership")).sort(
+  (a: CollectionEntry<"leadership">, b: CollectionEntry<"leadership">) => a.data.order - b.data.order,
+);
+const executiveBoard: CollectionEntry<"leadership">[] = leadership.filter(
+  (entry: CollectionEntry<"leadership">) => entry.data.board === "diretoria-executiva",
+);
+const deliberativeBoard: CollectionEntry<"leadership">[] = leadership.filter(
+  (entry: CollectionEntry<"leadership">) => entry.data.board === "conselho-deliberativo",
+);
+const fiscalBoard: CollectionEntry<"leadership">[] = leadership.filter(
+  (entry: CollectionEntry<"leadership">) => entry.data.board === "conselho-fiscal",
+);
+
+const boardStats = [
+  { value: "2026/2027", label: "Mandato publicado", note: "Gestao vigente apresentada no portal." },
+  { value: `${executiveBoard.length}`, label: "Integrantes na diretoria executiva" },
+  { value: `${deliberativeBoard.length}`, label: "Integrantes no conselho deliberativo" },
+  { value: `${fiscalBoard.length}`, label: "Integrantes no conselho fiscal" },
+];
 ---
 
-<BaseLayout title="Diretoria | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Diretoria"
+  description="Gestao COCBMDF 2026/2027 com diretoria executiva, conselho deliberativo e conselho fiscal."
+  breadcrumbs={breadcrumbs}
+>
   <Header />
-  <div class="container breadcrumb-wrap">
-    <nav class="breadcrumb" aria-label="Trilha de navegacao">
-      <span>Voc&ecirc; est&aacute; aqui:</span>
-      <a href="index.html">In&iacute;cio</a>
-      <span>/</span>
-      <span>Institucional</span>
-      <span>/</span>
-      <span>Diretoria</span>
-    </nav>
-  </div>
+  <Breadcrumb items={breadcrumbs} />
   <main class="main-content">
     <div class="container">
       <section class="page-section">
-        <h1 class="page-title">Diretoria</h1>
-        <p class="page-subtitle">Gest&atilde;o COCBMDF 2026/2027.</p>
-        <div class="section-divider"></div>
+        <SectionHeader
+          title="Diretoria"
+          level="h1"
+          subtitle="Gestao COCBMDF 2026/2027 com organizacao colegiada, cargos executivos e governanca institucional."
+        />
+        <div class="legacy-split diretoria-page__intro">
+          <div>
+            <p>
+              A estrutura de governanca do clube esta organizada em diretoria executiva, conselho deliberativo e
+              conselho fiscal, com definicao publica de cargos, nomes e postos.
+            </p>
+            <p class="page-copy-spaced">
+              A apresentacao abaixo reforca a autoridade institucional e facilita a consulta por associados,
+              convidados e interessados em acompanhar a gestao vigente.
+            </p>
+          </div>
+          <TrustStats items={boardStats} className="trust-stats--compact" />
+        </div>
         <div class="legacy-table-stack">
-          <div class="legacy-table-wrap legacy-table-wrap--board">
-            <div class="legacy-table-title">Diretoria Executiva</div>
-            <table class="legacy-table legacy-table--board">
-              <thead><tr><th>Cargo</th><th>Nome Completo</th><th>Posto</th></tr></thead>
-              <tbody>
-                <tr><td>Presidente</td><td>WELLLINGTON MOURA E SILVA</td><td>CEL</td></tr>
-                <tr><td>Vice-presidente</td><td>MAURO SERGIO SILVA COSTA</td><td>CAP</td></tr>
-                <tr><td>1&deg; Tesoureiro</td><td>MAURO ANDRE KAISER CABRAL</td><td>TC</td></tr>
-                <tr><td>2&deg; Tesoureiro</td><td>ANTONIO CLEMENTE DE OLIVEIRA</td><td>CAP</td></tr>
-                <tr><td>1&deg; Secret&aacute;rio</td><td>ATILA GOMES NASCIMENTO</td><td>CEL</td></tr>
-                <tr><td>2&deg; Secret&aacute;rio</td><td>VITOR HENRIQUE DA CUNHA MARIANO</td><td>MAJ</td></tr>
-                <tr><td>Diretor S&oacute;cio Cultural</td><td>LUCIANO DE ARAUJO GALENO JUNIOR</td><td>CAP</td></tr>
-                <tr><td>Diretor de Lazer e Atividades Desportivas</td><td>GUILHERME ROCHA FARIA</td><td>CAP</td></tr>
-                <tr><td>Diretor Administrativo e Patrim&ocirc;nio</td><td>JEAN CARLOS DE SOUZA RIBEIRO</td><td>MAJ</td></tr>
-                <tr><td>Diretor de Comunica&ccedil;&atilde;o Social</td><td>OCTAVIO AUGUSTO QUINTILIANO</td><td>CAP</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="legacy-table-wrap legacy-table-wrap--board">
-            <div class="legacy-table-title">Conselho Deliberativo</div>
-            <table class="legacy-table legacy-table--board">
-              <thead><tr><th>Cargo</th><th>Nome Completo</th><th>Posto</th></tr></thead>
-              <tbody>
-                <tr><td>Presidente</td><td>SILVERIO FREIRE DE CARVALHO FILHO</td><td>CEL</td></tr>
-                <tr><td>Vice-presidente</td><td>ARISTIDES ALMEIDA NETO</td><td>TC</td></tr>
-                <tr><td>1&deg; Conselheiro</td><td>PAULO ROBERTO</td><td>TC</td></tr>
-                <tr><td>2&deg; Conselheiro</td><td>FABIO MOREIRA SILVA</td><td>TC</td></tr>
-                <tr><td>1&deg; Suplente</td><td>ALFREDO JOSE DOS SANTOS NETO</td><td>MAJ</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="legacy-table-wrap legacy-table-wrap--board">
-            <div class="legacy-table-title">Conselho Fiscal</div>
-            <table class="legacy-table legacy-table--board">
-              <thead><tr><th>Cargo</th><th>Nome Completo</th><th>Posto</th></tr></thead>
-              <tbody>
-                <tr><td>Presidente</td><td>ENZO PEREIRA TEIXEIRA</td><td>TC</td></tr>
-                <tr><td>Vice-presidente</td><td>MAX WERNER MAIA BANDEIRA</td><td>TC</td></tr>
-                <tr><td>1&deg; Vogal</td><td>KLEBER FRANCISCO DE OLIVEIRA CORREIA</td><td>CEL</td></tr>
-                <tr><td>2&deg; Vogal</td><td>ELIANE VIEIRA DE ASSIS</td><td>TC</td></tr>
-                <tr><td>1&deg; Suplente</td><td>LEONARDO FARIA DE OLIVEIRA</td><td>MAJ</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <LeadershipTable
+            title="Diretoria Executiva"
+            description="Responsavel pela conducao administrativa, financeira, social e operacional da gestao."
+            members={executiveBoard}
+          />
+          <LeadershipTable
+            title="Conselho Deliberativo"
+            description="Colegiado de apoio institucional e deliberacao das pautas regimentais."
+            members={deliberativeBoard}
+          />
+          <LeadershipTable
+            title="Conselho Fiscal"
+            description="Colegiado destinado ao acompanhamento e a fiscalizacao dos controles institucionais."
+            members={fiscalBoard}
+          />
         </div>
       </section>
     </div>

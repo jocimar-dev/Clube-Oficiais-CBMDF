@@ -1,0 +1,11 @@
+{
+  "title": "Ficha de Cadastro - Titular",
+  "documentType": "Formulario de adesao",
+  "file": "/docs/ficha-cadastro-titular.doc",
+  "summary": "Documento base para cadastramento de novos associados titulares.",
+  "audience": "Interessados em associacao",
+  "featured": true,
+  "issuedAt": "Cadastro vigente",
+  "ctaLabel": "Baixar arquivo",
+  "category": "membership"
+}

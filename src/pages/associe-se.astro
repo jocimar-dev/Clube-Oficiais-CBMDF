@@ -1,38 +1,211 @@
-﻿---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import CTAGroup from "../components/CTAGroup.astro";
+import DocumentCard from "../components/DocumentCard.astro";
+import FaqList from "../components/FaqList.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact, trustSignals } from "../data/site";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Associe-se" },
+];
+
+const membershipDocuments: CollectionEntry<"documents">[] = (await getCollection("documents"))
+  .filter((entry: CollectionEntry<"documents">) => entry.data.category === "membership")
+  .sort(
+    (a: CollectionEntry<"documents">, b: CollectionEntry<"documents">) =>
+      Number(b.data.featured) - Number(a.data.featured),
+  );
+
+const faqItems = [
+  {
+    question: "Quem pode iniciar o processo de associacao?",
+    answer:
+      "O interessado deve consultar os documentos oficiais publicados no portal e seguir a orientacao da secretaria para verificar os requisitos aplicaveis ao quadro associativo.",
+  },
+  {
+    question: "Quais documentos sao normalmente solicitados?",
+    answer:
+      "A relacao inicial publicada nesta pagina inclui copia do RG, CPF, comprovante de renda, comprovante de residencia e certidao de casamento, quando aplicavel.",
+  },
+  {
+    question: "O pre-cadastro substitui a entrega dos formularios?",
+    answer:
+      "Nao. O pre-cadastro apenas antecipa o contato com a secretaria. A adesao continua condicionada ao envio dos formularios e da documentacao oficial.",
+  },
+  {
+    question: "Qual canal devo usar para falar com a secretaria?",
+    answer:
+      "Para orientacao inicial e retorno mais rapido, o canal prioritario e o WhatsApp institucional. O e-mail permanece disponivel para registro formal.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title="Associe-se | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Associe-se"
+  description="Formularios, checklist de documentos e canais oficiais para iniciar a associacao no Clube dos Oficiais CBMDF."
+  breadcrumbs={breadcrumbs}
+  schema={faqSchema}
+>
   <Header />
-<div class="container breadcrumb-wrap">
-  <nav class="breadcrumb" aria-label="Trilha de navegacao">
-    <span>Voc&ecirc; est&aacute; aqui:</span>
-    <a href="index.html">In&iacute;cio</a>
-    <span>/</span>
-    <span>Associe-se</span>
-  </nav>
-</div>
-<main class="main-content">
-  <div class="container">
-    <section class="page-section">
-      <h1 class="page-title">Associe-se</h1>
-      <div class="section-divider"></div>
-      <div class="legacy-doc-grid">
-        <article class="legacy-doc"><div class="legacy-doc__title">Ficha de Cadastro - Titular</div><div class="legacy-doc__body"><p>Documento base para cadastro de novos associados.</p><div class="legacy-doc__actions"><a class="legacy-doc__button" href="/docs/ficha-cadastro-titular.doc" download>Baixar arquivo</a></div></div></article>
-        <article class="legacy-doc"><div class="legacy-doc__title">Requerimento de Ades&atilde;o - S&oacute;cio</div><div class="legacy-doc__body"><p>Formulario de adesao para ingresso no quadro de associados.</p><div class="legacy-doc__actions"><a class="legacy-doc__button" href="/docs/requerimento-adesao-socio.doc" download>Baixar arquivo</a></div></div></article>
-        <article class="legacy-doc"><div class="legacy-doc__title">Checklist de Documentos</div><div class="legacy-doc__body"><p>C&oacute;pia do RG, CPF, Comprovante de renda e Comprovante de resid&ecirc;ncia. Certid&atilde;o de casamento, se casado.</p></div></article>
-      </div>
-      <h2 class="page-title" style="margin-top:24px;">Fluxo de associa&ccedil;&atilde;o</h2>
-      <ul class="legacy-line-list">
-        <li>Preenchimento da ficha e requerimento.</li>
-        <li>Entrega dos documentos na secretaria.</li>
-        <li>Analise e confirmacao de cadastro pela diretoria.</li>
-      </ul>
-    </section>
-  </div>
-</main>
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Associe-se"
+          level="h1"
+          subtitle="Fluxo de adesao com documentos, orientacao institucional e canais diretos da secretaria."
+        />
+        <div class="legacy-split associe-page__intro">
+          <article class="legacy-highlight">
+            <div class="legacy-highlight__title">Quem deseja ingressar</div>
+            <p>
+              Consulte os documentos oficiais, preencha os formularios e utilize o atendimento da secretaria para
+              orientacoes sobre cadastro e formalizacao do ingresso no quadro associativo.
+            </p>
+            <ul class="legacy-line-list legacy-line-list--compact">
+              {trustSignals.map((signal) => <li>{signal}</li>)}
+            </ul>
+          </article>
+          <article class="legacy-card">
+            <div class="legacy-card__head">Documentos necessarios</div>
+            <div class="legacy-card__body">
+              <p>Copia do RG, CPF, comprovante de renda e comprovante de residencia.</p>
+              <p>Certidao de casamento, se casado.</p>
+              <p class="legacy-card__meta">A secretaria orienta sobre eventuais complementacoes documentais.</p>
+            </div>
+          </article>
+        </div>
+        <div class="legacy-doc-grid">
+          {membershipDocuments.map((entry: CollectionEntry<"documents">) => (
+            <DocumentCard entry={entry} action="download" showDetailLink={false} />
+          ))}
+        </div>
+        <div class="legacy-grid legacy-grid--3 associe-flow__grid">
+          <article class="legacy-card">
+            <div class="legacy-card__head">1. Baixe os formularios</div>
+            <div class="legacy-card__body">
+              <p>Acesse a ficha de cadastro e o requerimento de adesao disponibilizados nesta pagina.</p>
+            </div>
+          </article>
+          <article class="legacy-card">
+            <div class="legacy-card__head">2. Organize a documentacao</div>
+            <div class="legacy-card__body">
+              <p>Separe os documentos obrigatorios e confirme a legibilidade de cada arquivo entregue.</p>
+            </div>
+          </article>
+          <article class="legacy-card">
+            <div class="legacy-card__head">3. Fale com a secretaria</div>
+            <div class="legacy-card__body">
+              <p>Envie sua duvida por WhatsApp ou e-mail para concluir o atendimento com orientacao institucional.</p>
+            </div>
+          </article>
+        </div>
+        <div class="associe-page__cta">
+          <CTAGroup
+            primary={{
+              href: contact.whatsappHref,
+              label: "Falar com a secretaria",
+              trackingName: "whatsapp_click",
+              trackingLocation: "associe-cta",
+            }}
+            secondary={{
+              href: contact.emailHref,
+              label: "Solicitar orientacao por e-mail",
+              trackingName: "email_click",
+              trackingLocation: "associe-cta",
+            }}
+          />
+        </div>
+        <SectionHeader
+          title="Pre-cadastro de interesse"
+          subtitle="Envie seus dados por WhatsApp ou e-mail para que a secretaria retorne com a orientacao inicial."
+          className="section-header--compact"
+        />
+        <div class="legacy-split associe-page__form-wrap">
+          <form
+            class="action-form"
+            data-message-form
+            data-form-context="Interesse em associacao"
+            data-subject="Interesse em associacao - site institucional"
+            data-intro="Ola, gostaria de iniciar o processo de associacao no Clube dos Oficiais CBMDF."
+            data-email-target={contact.email}
+            data-whatsapp-target={contact.whatsappNumber}
+            aria-label="Formulario de pre-cadastro para associacao"
+          >
+            <div class="action-form__grid action-form__grid--2">
+              <label>
+                <span>Nome completo</span>
+                <input type="text" name="nome" data-label="Nome completo" autocomplete="name" required />
+              </label>
+              <label>
+                <span>Telefone / WhatsApp</span>
+                <input type="tel" name="telefone" data-label="Telefone" autocomplete="tel" required />
+              </label>
+              <label>
+                <span>E-mail</span>
+                <input type="email" name="email" data-label="E-mail" autocomplete="email" required />
+              </label>
+              <label>
+                <span>Posto ou cargo</span>
+                <input type="text" name="posto" data-label="Posto ou cargo" />
+              </label>
+            </div>
+            <label>
+              <span>Mensagem</span>
+              <textarea
+                name="mensagem"
+                data-label="Mensagem"
+                placeholder="Informe sua duvida, disponibilidade ou observacao sobre o processo."
+              ></textarea>
+            </label>
+            <div class="action-form__actions">
+              <button class="button-primary" type="submit" data-message-channel="whatsapp">Enviar por WhatsApp</button>
+              <button class="legacy-doc__button legacy-doc__button--ghost" type="submit" data-message-channel="email">
+                Enviar por e-mail
+              </button>
+            </div>
+            <p class="action-form__note">
+              O envio do pre-cadastro nao substitui a documentacao exigida para adesao.
+            </p>
+            <p class="action-form__status" data-form-status role="status" aria-live="polite"></p>
+          </form>
+          <article class="legacy-card">
+            <div class="legacy-card__head">Orientacao da secretaria</div>
+            <div class="legacy-card__body">
+              <p>Utilize o pre-cadastro para iniciar o contato institucional com seus dados basicos.</p>
+              <p>A formalizacao da associacao continua vinculada ao envio dos formularios e documentos publicados nesta pagina.</p>
+              <p>Se preferir atendimento direto, utilize o telefone, o WhatsApp institucional ou o e-mail do clube.</p>
+            </div>
+          </article>
+        </div>
+        <SectionHeader
+          title="Perguntas frequentes"
+          subtitle="Pontos objetivos para reduzir duvidas antes do envio da documentacao."
+          className="section-header--compact"
+        />
+        <FaqList items={faqItems} />
+      </section>
+    </div>
+  </main>
   <Footer />
 </BaseLayout>
-

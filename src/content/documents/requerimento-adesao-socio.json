@@ -1,0 +1,11 @@
+{
+  "title": "Requerimento de Adesao - Socio",
+  "documentType": "Formulario de adesao",
+  "file": "/docs/requerimento-adesao-socio.doc",
+  "summary": "Requerimento para formalizar o ingresso no quadro de associados.",
+  "audience": "Interessados em associacao",
+  "featured": true,
+  "issuedAt": "Adesao vigente",
+  "ctaLabel": "Baixar arquivo",
+  "category": "membership"
+}

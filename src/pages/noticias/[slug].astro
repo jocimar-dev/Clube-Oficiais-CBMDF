@@ -1,0 +1,99 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTAGroup from "../../components/CTAGroup.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { contact } from "../../data/site";
+import { formatFullDate } from "../../data/content-utils";
+
+export async function getStaticPaths() {
+  const news = await getCollection("news");
+
+  return news.map((entry: CollectionEntry<"news">) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"news">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const breadcrumbs = [
+  { label: "Inicio", href: "/index.html" },
+  { label: "Noticias", href: "/noticias.html" },
+  { label: entry.data.title },
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: entry.data.title,
+  datePublished: entry.data.publishedAt.toISOString(),
+  image: entry.data.cover ? [`https://clubedosoficiaiscbmdf.com.br${entry.data.cover}`] : undefined,
+  articleSection: entry.data.category,
+  description: entry.data.summary,
+};
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  breadcrumbs={breadcrumbs}
+  ogImage={entry.data.cover}
+  schema={articleSchema}
+>
+  <Header />
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <article class="page-section article-detail">
+        <SectionHeader title={entry.data.title} level="h1" subtitle={entry.data.summary} />
+        <div class="legacy-split article-detail__hero">
+          <div>
+            <p class="legacy-card__meta">
+              Categoria: {entry.data.category} | Publicado em {formatFullDate(entry.data.publishedAt)}
+            </p>
+            {entry.data.tags.length > 0 && (
+              <div class="article-detail__tags">
+                {entry.data.tags.map((tag: string) => <span>{tag}</span>)}
+              </div>
+            )}
+            <div class="article-detail__body">
+              <Content />
+            </div>
+          </div>
+          <aside class="article-detail__aside">
+            {entry.data.cover && (
+              <figure class="article-detail__media">
+                <img src={entry.data.cover} alt={entry.data.title} loading="eager" />
+                <figcaption>Imagem institucional vinculada a esta publicacao.</figcaption>
+              </figure>
+            )}
+            <article class="legacy-card">
+              <div class="legacy-card__head">Acesso rapido</div>
+              <div class="legacy-card__body">
+                {entry.data.pdfUrl && (
+                  <p><a href={entry.data.pdfUrl} target="_blank" rel="noopener noreferrer">Abrir informativo em PDF</a></p>
+                )}
+                <div class="article-detail__actions">
+                  <CTAGroup
+                    primary={{ href: "/noticias.html", label: "Voltar para noticias" }}
+                    secondary={{ href: contact.emailHref, label: "Solicitar informativos" }}
+                  />
+                </div>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </article>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
