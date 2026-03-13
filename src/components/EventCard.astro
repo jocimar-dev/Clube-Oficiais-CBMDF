@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { eventStatusLabel, formatFullDate } from "../data/content-utils";
+
+interface Props {
+  entry: CollectionEntry<"events">;
+  compact?: boolean;
+  state?: "upcoming" | "past";
+}
+
+const { entry, compact = false, state } = Astro.props;
+---
+
+<article
+  class:list={["legacy-card", "event-card", compact && "event-card--compact"]}
+  data-event-card
+  data-event-status={entry.data.status}
+  data-event-state={state}
+  data-event-title={entry.data.title.toLowerCase()}
+  data-event-summary={entry.data.summary.toLowerCase()}
+  data-event-location={entry.data.location.toLowerCase()}
+>
+  <div class="legacy-card__head">{entry.data.title}</div>
+  <div class="event-card__media">
+    <img src={entry.data.cover} alt={entry.data.title} loading="lazy" />
+  </div>
+  <div class="legacy-card__body">
+    <p>{entry.data.summary}</p>
+    <p class="legacy-card__meta">
+      {formatFullDate(entry.data.startDate)}
+      {entry.data.time && <> | {entry.data.time}</>}
+    </p>
+    <p class="legacy-card__meta">{eventStatusLabel(entry)} | {entry.data.location}</p>
+    <p><a href={`/eventos/${entry.id}.html`}>Ver detalhes do evento</a></p>
+  </div>
+</article>

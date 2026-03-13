@@ -1,0 +1,15 @@
+{
+  "title": "Dia das Criancas",
+  "summary": "Programacao infantil com brincadeiras, pintura e atividades para toda a familia.",
+  "startDate": "2025-10-12",
+  "time": "10h as 16h",
+  "location": "Clube dos Oficiais CBMDF",
+  "status": "social",
+  "cover": "/images/evento-dia-criancas.png",
+  "highlights": [
+    "Atividades recreativas voltadas ao publico infantil.",
+    "Integracao familiar com brincadeiras e convivencia social.",
+    "Programacao comemorativa alinhada ao calendario anual."
+  ],
+  "sortOrder": 2
+}

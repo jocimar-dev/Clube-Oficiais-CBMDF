@@ -1,0 +1,24 @@
+---
+interface StatItem {
+  value: string;
+  label: string;
+  note?: string;
+}
+
+interface Props {
+  items: StatItem[];
+  className?: string;
+}
+
+const { items, className = "" } = Astro.props;
+---
+
+<div class:list={["trust-stats", className]}>
+  {items.map((item) => (
+    <article class="trust-stats__item">
+      <p class="trust-stats__value">{item.value}</p>
+      <p class="trust-stats__label">{item.label}</p>
+      {item.note && <p class="trust-stats__note">{item.note}</p>}
+    </article>
+  ))}
+</div>

@@ -1,0 +1,48 @@
+---
+interface LeaderEntry {
+  id: string;
+  data: {
+    name: string;
+    role: string;
+    board: string;
+    term: string;
+    order: number;
+    rank: string;
+    bio?: string;
+  };
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  members: LeaderEntry[];
+}
+
+const { title, description, members } = Astro.props;
+---
+
+<section class="legacy-table-wrap legacy-table-wrap--board">
+  <div class="legacy-table-title">{title}</div>
+  {description && <p class="legacy-table-summary">{description}</p>}
+  <table class="legacy-table legacy-table--board">
+    <thead>
+      <tr>
+        <th>Cargo</th>
+        <th>Nome completo</th>
+        <th>Posto</th>
+      </tr>
+    </thead>
+    <tbody>
+      {members.map((member) => (
+        <tr>
+          <td>{member.data.role}</td>
+          <td>
+            {member.data.name}
+            {member.data.bio && <span class="legacy-table-note">{member.data.bio}</span>}
+          </td>
+          <td>{member.data.rank}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</section>

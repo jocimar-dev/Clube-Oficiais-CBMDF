@@ -1,41 +1,101 @@
-﻿---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import DocumentCard from "../components/DocumentCard.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Institucional", href: "institucional.html" },
+  { label: "Regulamentos" },
+];
+
+const documents: CollectionEntry<"documents">[] = await getCollection("documents");
+const regulations: CollectionEntry<"documents">[] = documents.filter(
+  (entry: CollectionEntry<"documents">) => entry.data.category === "regulation",
+);
+const membership: CollectionEntry<"documents">[] = documents.filter(
+  (entry: CollectionEntry<"documents">) => entry.data.category === "membership",
+);
+const newsletters: CollectionEntry<"documents">[] = documents
+  .filter((entry: CollectionEntry<"documents">) => entry.data.category === "newsletter")
+  .sort((a: CollectionEntry<"documents">, b: CollectionEntry<"documents">) => {
+    const order = { "Informativo - Edicao 3": 0, "Informativo - Edicao 2": 1, "Informativo - Edicao 1": 2 };
+    return (order[a.data.title] ?? 99) - (order[b.data.title] ?? 99);
+  });
 ---
 
-<BaseLayout title="Regulamentos | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Regulamentos"
+  description="Repositorio institucional com estatuto, formularios de associacao e informativos publicados pelo Clube dos Oficiais CBMDF."
+  breadcrumbs={breadcrumbs}
+>
   <Header />
-<div class="container breadcrumb-wrap">
-  <nav class="breadcrumb" aria-label="Trilha de navegacao">
-    <span>Voc&ecirc; est&aacute; aqui:</span>
-    <a href="index.html">In&iacute;cio</a>
-    <span>/</span>
-    <span>Institucional</span>
-    <span>/</span>
-    <span>Regulamentos</span>
-  </nav>
-</div>
-<main class="main-content">
-  <div class="container">
-    <section class="page-section">
-      <h1 class="page-title">Regulamentos</h1>
-      <div class="section-divider"></div>
-      <div class="legacy-grid legacy-grid--3">
-        <article class="legacy-card"><div class="legacy-card__head">Estatuto do Clube</div><div class="legacy-card__body"><p>Estatuto do Clube dos Oficiais do CBMDF.</p><p><a class="legacy-inline-link" href="/docs/estatuto-cob.pdf" target="_blank" rel="noopener noreferrer">Visualizar documento</a></p></div></article>
-        <article class="legacy-card"><div class="legacy-card__head">Normas de Acesso ao Clube</div><div class="legacy-card__body"><p>Regulamento n&ordm; 01/2015 - Normas de acesso ao clube.</p><p><a class="legacy-inline-link" href="#">Visualizar documento</a></p></div></article>
-        <article class="legacy-card"><div class="legacy-card__head">Utiliza&ccedil;&atilde;o das Churrasqueiras</div><div class="legacy-card__body"><p>Regulamento n&ordm; 02/2015 e 03/2015 - uso e condicoes das churrasqueiras.</p><p><a class="legacy-inline-link" href="#">Visualizar documento</a></p></div></article>
-      </div>
-      <div class="legacy-table-wrap" style="margin-top:20px;">
-        <div class="legacy-table-title">Documentos Institucionais Complementares</div>
-        <table class="legacy-table">
-          <thead><tr><th>Documento</th><th>Tipo</th><th>Status</th></tr></thead>
-          <tbody><tr><td>Edital de Convocacao</td><td>Assembleia</td><td>Disponivel</td></tr><tr><td>Ata da Ultima Reuniao</td><td>Registro</td><td>Disponivel</td></tr><tr><td>Regimento Interno</td><td>Normativo</td><td>Disponivel</td></tr></tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-</main>
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Documentos oficiais"
+          level="h1"
+          subtitle="Normativos, formularios e publicacoes institucionais reunidos em um unico repositorio."
+        />
+        <div class="document-repository__toolbar" data-document-filters>
+          <label class="document-repository__search">
+            <span class="is-hidden">Buscar documento</span>
+            <input
+              type="search"
+              placeholder="Buscar por titulo, tipo ou publico"
+              data-document-search
+            />
+          </label>
+          <div class="document-repository__chips" aria-label="Filtrar documentos por categoria">
+            <button type="button" class="is-active" data-document-filter="all">Todos</button>
+            <button type="button" data-document-filter="regulation">Normativos</button>
+            <button type="button" data-document-filter="membership">Associacao</button>
+            <button type="button" data-document-filter="newsletter">Informativos</button>
+          </div>
+        </div>
+
+        <div data-document-section>
+          <SectionHeader
+            title="Normativos institucionais"
+            subtitle="Estatuto e documentos de referencia oficial do clube."
+            className="section-header--compact"
+          />
+          <div class="legacy-doc-grid" data-document-section-body>
+            {regulations.map((entry: CollectionEntry<"documents">) => <DocumentCard entry={entry} />)}
+          </div>
+        </div>
+
+        <div data-document-section>
+          <SectionHeader
+            title="Associacao e formularios"
+            subtitle="Arquivos necessarios para iniciar o fluxo de cadastro e adesao."
+            className="section-header--compact"
+          />
+          <div class="legacy-doc-grid" data-document-section-body>
+            {membership.map((entry: CollectionEntry<"documents">) => (
+              <DocumentCard entry={entry} action="download" />
+            ))}
+          </div>
+        </div>
+
+        <div data-document-section>
+          <SectionHeader
+            title="Informativos publicados"
+            subtitle="Edicoes organizadas para consulta e acompanhamento das comunicacoes institucionais."
+            className="section-header--compact"
+          />
+          <div class="legacy-doc-grid" data-document-section-body>
+            {newsletters.map((entry: CollectionEntry<"documents">) => <DocumentCard entry={entry} />)}
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
   <Footer />
 </BaseLayout>
-

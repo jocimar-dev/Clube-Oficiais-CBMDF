@@ -1,0 +1,15 @@
+{
+  "title": "Esse Forro e Nosso",
+  "summary": "Noite musical com atracoes culturais e convivencia social dos associados.",
+  "startDate": "2025-10-19",
+  "time": "21h",
+  "location": "Clube dos Oficiais CBMDF",
+  "status": "social",
+  "cover": "/images/evento-forro-nosso.png",
+  "highlights": [
+    "Programacao cultural com musica e convivencia social.",
+    "Evento voltado ao fortalecimento do calendario festivo do clube.",
+    "Integra associacao, lazer e agenda noturna institucional."
+  ],
+  "sortOrder": 3
+}

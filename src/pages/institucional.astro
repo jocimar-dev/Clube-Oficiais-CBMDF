@@ -1,34 +1,85 @@
-﻿---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+---
+import Breadcrumb from "../components/Breadcrumb.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import TrustStats from "../components/TrustStats.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homeTrustStats } from "../data/site";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Institucional" },
+];
 ---
 
-<BaseLayout title="Institucional | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Institucional"
+  description="Visao institucional do Clube dos Oficiais CBMDF com historia, governanca, documentos e servicos principais."
+  breadcrumbs={breadcrumbs}
+>
   <Header />
-<div class="container breadcrumb-wrap">
-  <nav class="breadcrumb" aria-label="Trilha de navegacao">
-    <span>Voc&ecirc; est&aacute; aqui:</span>
-    <a href="index.html">In&iacute;cio</a>
-    <span>/</span>
-    <span>Institucional</span>
-  </nav>
-</div>
-<main class="main-content">
-  <div class="container">
-    <section class="page-section">
-      <h1 class="page-title">Institucional</h1>
-      <p class="page-subtitle">Acesso central para as informacoes institucionais do clube.</p>
-      <div class="section-divider"></div>
-      <div class="legacy-grid legacy-grid--3">
-        <article class="legacy-doc"><div class="legacy-doc__title">Hist&oacute;ria</div><div class="legacy-doc__body"><p>Origem do clube e linha do tempo de presidencias.</p><div class="legacy-doc__actions"><a class="legacy-doc__button" href="historia.html">Abrir pagina</a></div></div></article>
-        <article class="legacy-doc"><div class="legacy-doc__title">Hor&aacute;rios de Funcionamento</div><div class="legacy-doc__body"><p>Horarios do clube e da secretaria em pagina dedicada.</p><div class="legacy-doc__actions"><a class="legacy-doc__button" href="horarios.html">Abrir pagina</a></div></div></article>
-        <article class="legacy-doc"><div class="legacy-doc__title">Benef&iacute;cios e Conv&ecirc;nios</div><div class="legacy-doc__body"><p>Beneficios e convenios consolidados.</p><div class="legacy-doc__actions"><a class="legacy-doc__button" href="conheca-clube.html">Abrir pagina</a></div></div></article>
-        <article class="legacy-doc"><div class="legacy-doc__title">Regulamentos</div><div class="legacy-doc__body"><p>Normas institucionais e documentos de referencia.</p><div class="legacy-doc__actions"><a class="legacy-doc__button" href="regulamentos.html">Abrir pagina</a></div></div></article>
-      </div>
-    </section>
-  </div>
-</main>
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Institucional"
+          level="h1"
+          subtitle="Panorama institucional do clube com foco em governanca, memoria, servicos e canais oficiais."
+        />
+        <div class="legacy-split institutional-page__intro">
+          <div>
+            <p>
+              O portal institucional organiza as informacoes centrais do clube para consulta publica, atendimento aos
+              associados e orientacao sobre governanca, regulamentos, horarios e estrutura.
+            </p>
+            <p class="page-copy-spaced">
+              A navegacao abaixo concentra as paginas mais relevantes para compreender a atuacao institucional,
+              acompanhar a gestao vigente e acessar documentos oficiais.
+            </p>
+          </div>
+          <article class="legacy-highlight">
+            <div class="legacy-highlight__title">Governanca institucional</div>
+            <p>
+              O clube publica sua diretoria vigente, historico institucional, documentos oficiais e canais de
+              atendimento em ambiente unico e acessivel.
+            </p>
+          </article>
+        </div>
+        <TrustStats items={homeTrustStats} />
+        <div class="legacy-grid legacy-grid--2 institutional-page__grid">
+          <article class="legacy-doc">
+            <div class="legacy-doc__title">Historia</div>
+            <div class="legacy-doc__body">
+              <p>Fundacao do clube, marcos institucionais e linha do tempo da presidencia.</p>
+              <div class="legacy-doc__actions"><a class="legacy-doc__button" href="historia.html">Abrir pagina</a></div>
+            </div>
+          </article>
+          <article class="legacy-doc">
+            <div class="legacy-doc__title">Diretoria</div>
+            <div class="legacy-doc__body">
+              <p>Gestao 2026/2027 com diretoria executiva e colegiados de governanca.</p>
+              <div class="legacy-doc__actions"><a class="legacy-doc__button" href="diretoria.html">Abrir pagina</a></div>
+            </div>
+          </article>
+          <article class="legacy-doc">
+            <div class="legacy-doc__title">Documentos oficiais</div>
+            <div class="legacy-doc__body">
+              <p>Estatuto, formularios de associacao e informativos em repositorio unico.</p>
+              <div class="legacy-doc__actions"><a class="legacy-doc__button" href="regulamentos.html">Abrir pagina</a></div>
+            </div>
+          </article>
+          <article class="legacy-doc">
+            <div class="legacy-doc__title">Horarios e contato</div>
+            <div class="legacy-doc__body">
+              <p>Funcionamento do clube, secretaria, localizacao e canais diretos de atendimento.</p>
+              <div class="legacy-doc__actions"><a class="legacy-doc__button" href="contatos.html">Abrir pagina</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
   <Footer />
 </BaseLayout>
-

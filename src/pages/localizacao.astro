@@ -1,42 +1,85 @@
-﻿---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+---
+import Breadcrumb from "../components/Breadcrumb.astro";
+import CTAGroup from "../components/CTAGroup.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact } from "../data/site";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Localizacao" },
+];
+
+const locationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SportsActivityLocation",
+  name: "Clube dos Oficiais do Corpo de Bombeiros Militar do Distrito Federal",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "SCES Trecho 2 Lote 02/35",
+    addressLocality: "Brasilia",
+    addressRegion: "DF",
+    postalCode: "70200-002",
+    addressCountry: "BR",
+  },
+  telephone: "+55-61-3224-6041",
+};
 ---
 
-<BaseLayout title="Localiza&ccedil;&atilde;o | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Localizacao"
+  description="Endereco oficial, referencias de acesso e mapa do Clube dos Oficiais CBMDF em Brasilia."
+  breadcrumbs={breadcrumbs}
+  schema={locationSchema}
+>
   <Header />
-<div class="container breadcrumb-wrap">
-  <nav class="breadcrumb" aria-label="Trilha de navegacao">
-    <span>Voc&ecirc; est&aacute; aqui:</span>
-    <a href="index.html">In&iacute;cio</a>
-    <span>/</span>
-    <span>Localiza&ccedil;&atilde;o</span>
-  </nav>
-</div>
-<main class="main-content">
-  <div class="container">
-    <section class="page-section">
-      <h1 class="page-title">Localiza&ccedil;&atilde;o</h1>
-      <p class="page-subtitle">Informacoes de acesso ao Clube dos Oficiais do CBMDF.</p>
-      <div class="section-divider"></div>
-      <div class="legacy-split">
-        <div>
-          <h2 class="page-title" style="font-size:1.8rem;">Endere&ccedil;o</h2>
-          <p>COCBM-DF</p><p>SCES Trecho 2 Lote 02/35</p><p>CEP: 70200-002 - Brasilia, DF</p>
-          <p style="margin-top:12px;">Referencias: regiao de clubes do Lago Sul, com acesso por vias principais da cidade.</p>
-          <h2 class="page-title" style="font-size:1.8rem; margin-top:20px;">Acesso</h2>
-          <ul class="legacy-line-list">
-            <li>Entrada principal com identificacao de associados.</li>
-            <li>Estacionamento interno para visitantes autorizados.</li>
-            <li>Atendimento na secretaria durante horario administrativo.</li>
-          </ul>
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Localizacao"
+          level="h1"
+          subtitle="Endereco oficial, referencias de acesso e navegacao por mapa do Clube dos Oficiais CBMDF."
+        />
+        <div class="legacy-split location-page">
+          <div>
+            <h2 class="section-subtitle">Endereco</h2>
+            <p>COCBM-DF</p>
+            <p>{contact.addressLine1}</p>
+            <p>{contact.addressLine2}</p>
+            <p class="page-copy-spaced">
+              Referencia: regiao de clubes do Lago Sul, com acesso pelas vias principais do Distrito Federal.
+            </p>
+            <h2 class="section-subtitle section-subtitle--spaced">Acesso</h2>
+            <ul class="legacy-line-list">
+              <li>Entrada principal com identificacao de associados e visitantes autorizados.</li>
+              <li>Estacionamento interno para atendimento e programacao do clube.</li>
+              <li>Secretaria em funcionamento durante o horario administrativo publicado no portal.</li>
+            </ul>
+            <div class="location-page__actions">
+              <CTAGroup
+                primary={{
+                  href: "https://www.google.com/maps/search/?api=1&query=SCES+Trecho+2+Lote+02%2F35+Brasilia+DF",
+                  label: "Abrir no mapa",
+                }}
+                secondary={{ href: contact.whatsappHref, label: "Pedir orientacao por WhatsApp" }}
+              />
+            </div>
+          </div>
+          <div class="location-map">
+            <iframe
+              title="Mapa do Clube dos Oficiais CBMDF"
+              src="https://www.google.com/maps?q=SCES%20Trecho%202%20Lote%2002%2F35%2C%20Brasilia%20DF&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
-        <div class="placeholder-map"><p>Mapa do clube (placeholder visual)</p><p>Integracao com mapa real pode ser adicionada depois.</p></div>
-      </div>
-    </section>
-  </div>
-</main>
+      </section>
+    </div>
+  </main>
   <Footer />
 </BaseLayout>
-

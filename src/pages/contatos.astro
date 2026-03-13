@@ -1,41 +1,194 @@
-﻿---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
+---
+import Breadcrumb from "../components/Breadcrumb.astro";
+import CTAGroup from "../components/CTAGroup.astro";
+import FaqList from "../components/FaqList.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact } from "../data/site";
+
+const breadcrumbs = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Contatos" },
+];
+
+const faqItems = [
+  {
+    question: "Qual canal costuma responder mais rapido?",
+    answer:
+      "O WhatsApp institucional e o canal mais indicado para retorno inicial da secretaria, especialmente para orientacoes de associacao e atendimento geral.",
+  },
+  {
+    question: "Posso tratar associacao pela pagina de contatos?",
+    answer:
+      "Sim, mas a pagina Associe-se concentra formularios, checklist documental e orientacoes especificas para adesao. Ela deve ser usada como referencia principal.",
+  },
+  {
+    question: "Onde encontro os horarios da secretaria?",
+    answer:
+      "Os horarios resumidos estao nesta pagina e a pagina Horarios de Funcionamento centraliza as informacoes publicadas sobre atendimento e operacao do clube.",
+  },
+  {
+    question: "Como chegar ao clube?",
+    answer:
+      "A pagina Localizacao reune o endereco oficial, referencias de acesso e o mapa incorporado para navegacao direta ate o clube.",
+  },
+];
+
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contatos - Clube dos Oficiais CBMDF",
+  description:
+    "Canais oficiais para atendimento institucional, secretaria, associacao, eventos e informacoes gerais do Clube dos Oficiais CBMDF.",
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title="Contatos | Clube dos Oficiais CBMDF">
+<BaseLayout
+  title="Contatos"
+  description="Telefone, WhatsApp, e-mail institucional, horarios e orientacoes de atendimento da secretaria do Clube dos Oficiais CBMDF."
+  breadcrumbs={breadcrumbs}
+  schema={[contactPageSchema, faqSchema]}
+>
   <Header />
-<div class="container breadcrumb-wrap">
-  <nav class="breadcrumb" aria-label="Trilha de navegacao">
-    <span>Voc&ecirc; est&aacute; aqui:</span>
-    <a href="index.html">In&iacute;cio</a>
-    <span>/</span>
-    <span>Contatos</span>
-  </nav>
-</div>
-<main class="main-content">
-  <div class="container">
-    <section class="page-section">
-      <h1 class="page-title">Contatos</h1>
-      <p class="page-subtitle">Canais de atendimento da secretaria e contato institucional.</p>
-      <div class="section-divider"></div>
-      <div class="legacy-split">
-        <div>
-          <div class="legacy-card"><div class="legacy-card__head">Canais Diretos</div><div class="legacy-card__body"><p>Telefone: <a href="tel:+556132246041">(61) 3224-6041</a></p><p>WhatsApp: <a href="https://wa.me/5561986257009" target="_blank" rel="noopener noreferrer">(61) 98625-7009</a></p><p>E-mail: <a href="mailto:cocbmdf@uol.com.br">cocbmdf@uol.com.br</a></p></div></div>
-          <div class="legacy-card" style="margin-top:18px;"><div class="legacy-card__head">Hor&aacute;rios de atendimento</div><div class="legacy-card__body"><p>Ter&ccedil;a a Sexta: 09h &agrave;s 17h</p><p>S&aacute;bado, Domingo e Feriados: 09h &agrave;s 18h</p><p>Secretaria: Ter&ccedil;a a S&aacute;bado, 09h &agrave;s 17h</p></div></div>
+  <Breadcrumb items={breadcrumbs} />
+  <main class="main-content">
+    <div class="container">
+      <section class="page-section">
+        <SectionHeader
+          title="Contatos"
+          level="h1"
+          subtitle="Canais oficiais para atendimento da secretaria, informacoes institucionais e orientacao de associacao."
+        />
+        <div class="legacy-split contacts-page">
+          <div class="legacy-grid contacts-page__grid">
+            <article class="legacy-card">
+              <div class="legacy-card__head">Canais diretos</div>
+              <div class="legacy-card__body">
+                <p>Telefone: <a href={contact.phoneHref}>{contact.phoneDisplay}</a></p>
+                <p>WhatsApp: <a href={contact.whatsappHref} target="_blank" rel="noopener noreferrer">{contact.whatsappDisplay}</a></p>
+                <p>E-mail: <a href={contact.emailHref}>{contact.email}</a></p>
+              </div>
+            </article>
+            <article class="legacy-card">
+              <div class="legacy-card__head">Horarios de atendimento</div>
+              <div class="legacy-card__body">
+                <p>Terca a sexta: 09h as 17h</p>
+                <p>Sabado, domingo e feriados: 09h as 18h</p>
+                <p>Secretaria: terca a sabado, 09h as 17h</p>
+              </div>
+            </article>
+            <article class="legacy-card">
+              <div class="legacy-card__head">Expectativa de resposta</div>
+              <div class="legacy-card__body">
+                <p>Demandas administrativas devem ser direcionadas para a secretaria pelos canais institucionais.</p>
+                <p>Para associacao, utilize preferencialmente o WhatsApp e a pagina de adesao com os formularios.</p>
+              </div>
+            </article>
+          </div>
+          <div class="contacts-page__side">
+            <article class="legacy-highlight contacts-page__highlight">
+              <div class="legacy-highlight__title">Fale com a secretaria</div>
+              <p>
+                O atendimento institucional esta organizado para orientacao sobre associacao, documentos, agenda social e
+                informacoes gerais do clube.
+              </p>
+              <div class="contacts-page__actions">
+                <CTAGroup
+                  primary={{
+                    href: contact.whatsappHref,
+                    label: "Atendimento por WhatsApp",
+                    trackingName: "whatsapp_click",
+                    trackingLocation: "contacts-highlight",
+                  }}
+                  secondary={{
+                    href: contact.emailHref,
+                    label: "Enviar e-mail institucional",
+                    trackingName: "email_click",
+                    trackingLocation: "contacts-highlight",
+                  }}
+                />
+              </div>
+            </article>
+            <form
+              class="action-form"
+              data-message-form
+              data-form-context="Contato institucional"
+              data-subject="Contato institucional - site do Clube dos Oficiais CBMDF"
+              data-intro="Ola, gostaria de entrar em contato com a secretaria do Clube dos Oficiais CBMDF."
+              data-email-target={contact.email}
+              data-whatsapp-target={contact.whatsappNumber}
+              aria-label="Formulario de contato institucional"
+            >
+              <div class="action-form__grid action-form__grid--2">
+                <label>
+                  <span>Nome completo</span>
+                  <input type="text" name="nome" data-label="Nome completo" autocomplete="name" required />
+                </label>
+                <label>
+                  <span>Telefone</span>
+                  <input type="tel" name="telefone" data-label="Telefone" autocomplete="tel" />
+                </label>
+                <label>
+                  <span>E-mail</span>
+                  <input type="email" name="email" data-label="E-mail" autocomplete="email" required />
+                </label>
+                <label>
+                  <span>Assunto</span>
+                  <select name="assunto" data-label="Assunto" required>
+                    <option value="">Selecione</option>
+                    <option value="Associacao">Associacao</option>
+                    <option value="Secretaria">Secretaria</option>
+                    <option value="Eventos">Eventos</option>
+                    <option value="Documentos">Documentos</option>
+                    <option value="Outros">Outros</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                <span>Mensagem</span>
+                <textarea
+                  name="mensagem"
+                  data-label="Mensagem"
+                  placeholder="Descreva sua solicitacao para que a secretaria retorne com mais precisao."
+                  required
+                ></textarea>
+              </label>
+              <div class="action-form__actions">
+                <button class="button-primary" type="submit" data-message-channel="whatsapp">Enviar por WhatsApp</button>
+                <button class="legacy-doc__button legacy-doc__button--ghost" type="submit" data-message-channel="email">
+                  Enviar por e-mail
+                </button>
+              </div>
+              <p class="action-form__note">
+                Para temas urgentes, o canal mais rapido continua sendo o WhatsApp institucional.
+              </p>
+              <p class="action-form__status" data-form-status role="status" aria-live="polite"></p>
+            </form>
+          </div>
         </div>
-        <form class="form-block" data-form aria-label="Formulario de contato institucional">
-          <div><label for="nome">Nome</label><input id="nome" name="nome" type="text" required placeholder="Seu nome" /></div>
-          <div><label for="email">E-mail</label><input id="email" name="email" type="email" required placeholder="voce@email.com" /></div>
-          <div><label for="assunto">Assunto</label><select id="assunto" name="assunto" required><option value="">Selecione</option><option value="associacao">Associacao</option><option value="secretaria">Secretaria</option><option value="eventos">Eventos</option></select></div>
-          <div><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" required placeholder="Digite sua mensagem"></textarea></div>
-          <button class="button-primary" type="submit">Enviar mensagem</button>
-        </form>
-      </div>
-    </section>
-  </div>
-</main>
+        <SectionHeader
+          title="Perguntas frequentes"
+          subtitle="Respostas curtas para orientar o contato institucional antes do envio da mensagem."
+          className="section-header--compact"
+        />
+        <FaqList items={faqItems} />
+      </section>
+    </div>
+  </main>
   <Footer />
 </BaseLayout>
-
