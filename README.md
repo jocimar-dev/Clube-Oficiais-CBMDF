@@ -30,13 +30,22 @@ Site estatico institucional do Clube de Oficiais dos Bombeiros do DF, com layout
 
 ## Como executar
 1. Abra a pasta `Clube-Oficiais-CBMDF`.
-2. Inicie um servidor local na pasta do projeto.
-3. Acesse `http://localhost:5500/index.html` (ou a porta usada no seu ambiente).
+2. Execute `npm ci` para instalar as dependencias.
+3. Execute `npm run dev` e abra o endereco local informado pelo Astro.
 
-Exemplo com VS Code:
-1. Instale a extensao Live Server.
-2. Clique com o botao direito em `index.html`.
-3. Selecione `Open with Live Server`.
+Para validar a tipagem e gerar o site estatico, execute `npm run check` e `npm run build`.
+
+## Deploy na Vercel pelo GitHub Actions
+
+O workflow de CI faz deploy de producao automaticamente quando um push para `main` passa nas verificacoes e no build. Tambem e possivel iniciar o workflow manualmente na branch `main` pela aba **Actions** do GitHub.
+
+Configure estes valores em **Settings > Secrets and variables > Actions** no repositorio:
+
+- Variavel `VERCEL_ORG_ID`: ID da conta/equipe Vercel.
+- Variavel `VERCEL_PROJECT_ID`: ID do projeto Vercel.
+- Secret `VERCEL_TOKEN`: token pessoal da Vercel.
+
+Os IDs estao nas configuracoes gerais do projeto Vercel ou no arquivo `.vercel/project.json` depois de vincular o projeto com a CLI. O token deve ser cadastrado como secret e nunca colocado no codigo. Para evitar deploys duplicados, desative o deploy automatico por Git nas configuracoes do projeto Vercel se quiser que o Actions seja o unico responsavel por publicar.
 
 ## Personalizacao rapida
 - Conteudo e estrutura das paginas: arquivos `.html`.

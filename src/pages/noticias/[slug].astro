@@ -85,7 +85,12 @@ const articleSchema = {
                 <div class="article-detail__actions">
                   <CTAGroup
                     primary={{ href: "/noticias.html", label: "Voltar para noticias" }}
-                    secondary={{ href: contact.emailHref, label: "Solicitar informativos" }}
+                    secondary={{
+                      href: contact.whatsappHref,
+                      label: "Solicitar informativos no WhatsApp",
+                      trackingName: "whatsapp_click",
+                      trackingLocation: "news-detail",
+                    }}
                   />
                 </div>
               </div>

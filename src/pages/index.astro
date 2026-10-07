@@ -14,7 +14,7 @@ const events: CollectionEntry<"events">[] = (await getCollection("events")).sort
   (a: CollectionEntry<"events">, b: CollectionEntry<"events">) =>
     a.data.sortOrder - b.data.sortOrder || a.data.startDate.valueOf() - b.data.startDate.valueOf(),
 );
-
+const homeEvents = events.filter((event: CollectionEntry<"events">) => event.id !== "dia-das-criancas");
 const news: CollectionEntry<"news">[] = (await getCollection("news"))
   .sort((a: CollectionEntry<"news">, b: CollectionEntry<"news">) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
   .slice(0, 3);
@@ -87,6 +87,22 @@ const homeSchema = {
         </aside>
       </section>
 
+      <section class="home-kids-banner" aria-label="Banner da festa do Dia das Crianças">
+        <a class="home-kids-banner__poster" href="/eventos/dia-das-criancas.html" aria-label="Ver detalhes da festa do Dia das Crianças">
+          <img
+            src="/images/evento-dia-criancas.png"
+            alt="Cartaz da festa do Dia das Crianças do Clube dos Oficiais CBMDF — clique para ver detalhes"
+            loading="eager"
+          />
+        </a>
+        <div class="home-kids-banner__content">
+          <p class="home-kids-banner__eyebrow">Diversão para toda a família</p>
+          <h2>Dia das Crianças</h2>
+          <p>Um dia especial de brincadeiras, alegria e bons momentos no Clube dos Oficiais.</p>
+          <a class="home-kids-banner__link" href="/eventos/dia-das-criancas.html">Confira os detalhes <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
       <section class="page-section">
         <SectionHeader
           title="Numeros do Clube"
@@ -128,9 +144,9 @@ const homeSchema = {
               trackingLocation: "home-membership-flow",
             }}
             secondary={{
-              href: contact.emailHref,
-              label: "Solicitar orientacao por e-mail",
-              trackingName: "email_click",
+              href: contact.whatsappHref,
+              label: "Falar com a secretaria",
+              trackingName: "whatsapp_click",
               trackingLocation: "home-membership-flow",
             }}
           />
@@ -185,7 +201,7 @@ const homeSchema = {
           <div>
             <h3 class="home-updates__title">Eventos em destaque</h3>
             <div class="legacy-grid legacy-grid--2 home-events__grid home-events__grid--compact">
-              {events.map((event: CollectionEntry<"events">) => <EventCard entry={event} compact />)}
+              {homeEvents.map((event: CollectionEntry<"events">) => <EventCard entry={event} compact />)}
             </div>
             <p class="home-updates__link"><a href="eventos.html">Abrir pagina de eventos</a></p>
           </div>

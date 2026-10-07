@@ -8,11 +8,14 @@ export const formatFullDate = (date: Date) =>
     day: "2-digit",
     month: "long",
     year: "numeric",
+    timeZone: "UTC",
   });
 
 export const isUpcomingEvent = (event: CollectionEntry<"events">, reference = new Date()) => {
   const eventEnd = event.data.endDate ?? event.data.startDate;
-  return eventEnd >= reference;
+  const eventEndDay = Date.UTC(eventEnd.getUTCFullYear(), eventEnd.getUTCMonth(), eventEnd.getUTCDate());
+  const referenceDay = Date.UTC(reference.getFullYear(), reference.getMonth(), reference.getDate());
+  return eventEndDay >= referenceDay;
 };
 
 export const eventStatusLabel = (event: CollectionEntry<"events">, reference = new Date()) => {

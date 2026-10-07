@@ -10,6 +10,14 @@ const trackEvent = (name, properties = {}) => {
 };
 
 const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+const formatPhoneValue = (value) => {
+  const digits = String(value || '').replace(/\D/g, '').slice(0, 11);
+  if (digits.length === 0) return '';
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+};
 
 const mobileMenuButton = document.querySelector('[data-mobile-menu-button]');
 const mobileMenu = document.querySelector('[data-mobile-menu]');
@@ -62,6 +70,15 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closeDropdowns();
   }
+});
+
+const phoneFields = document.querySelectorAll('[data-phone-field]');
+phoneFields.forEach((field) => {
+  if (!(field instanceof HTMLInputElement)) return;
+
+  field.addEventListener('input', () => {
+    field.value = formatPhoneValue(field.value);
+  });
 });
 
 document.addEventListener('click', (event) => {
@@ -130,7 +147,7 @@ let activeGroup = '';
 navLinks.forEach((link) => {
   const href = link.getAttribute('href') || '';
   const [basePathRaw, hashRaw] = href.split('#');
-  const basePath = basePathRaw || '';
+  const basePath = (basePathRaw || '').replace(/^\/+/, '');
   const linkHash = hashRaw ? `#${hashRaw}` : '';
 
   const isPathMatch =

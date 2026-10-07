@@ -681,8 +681,7 @@ img {
 
 .action-form input,
 .action-form textarea,
-.action-form select,
-.footer-request-form input {
+.action-form select {
   width: 100%;
   border: 1px solid #cad7e3;
   border-radius: 10px;
@@ -713,14 +712,12 @@ img {
 }
 
 .action-form__note,
-.action-form__status,
-.footer-request-form__status {
+.action-form__status {
   color: #5b7083;
   font-size: 0.88rem;
 }
 
-.action-form__status,
-.footer-request-form__status {
+.action-form__status {
   min-height: 1.2em;
 }
 
@@ -889,6 +886,90 @@ img {
 
 .home-events {
   background: linear-gradient(180deg, #ffffff 0%, #f9fbfe 100%);
+}
+
+.home-kids-banner {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.75fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 44px);
+  margin: 0 auto 24px;
+  padding: clamp(16px, 3vw, 30px);
+  border: 1px solid #d5e1ee;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255, 215, 50, 0.24) 0 70px, transparent 72px),
+    linear-gradient(120deg, #fff8dc 0%, #f1faff 48%, #fff 100%);
+  box-shadow: 0 14px 34px rgba(24, 58, 87, 0.1);
+}
+
+.home-kids-banner__poster {
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border: 1px solid #e0e8f0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(24, 58, 87, 0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.home-kids-banner__poster:hover {
+  transform: translateY(-3px) rotate(-0.5deg);
+  box-shadow: 0 14px 28px rgba(24, 58, 87, 0.2);
+}
+
+.home-kids-banner__poster img {
+  display: block;
+  width: 100%;
+  height: min(360px, 52vw);
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.home-kids-banner__content h2 {
+  margin: 4px 0 10px;
+  color: #173c5a;
+  font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+}
+
+.home-kids-banner__content > p:not(.home-kids-banner__eyebrow) {
+  max-width: 42ch;
+  color: #3f566c;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.home-kids-banner__eyebrow {
+  margin: 0;
+  color: #b53035;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-kids-banner__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #bd3037;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.home-kids-banner__link:hover {
+  transform: translateY(-2px);
+  background: #98252b;
+}
+
+.home-kids-banner__link span {
+  font-size: 1.2em;
 }
 
 .home-events__grid {
@@ -1330,6 +1411,74 @@ img {
   align-items: start;
 }
 
+.associe-page__intro {
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.95fr);
+  align-items: stretch;
+}
+
+.associe-page__summary,
+.associe-page__requirements,
+.associe-step-card {
+  height: 100%;
+}
+
+.associe-page__summary {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 22px 18px;
+}
+
+.associe-page__summary .legacy-highlight__title {
+  margin-bottom: 0;
+}
+
+.associe-page__summary p {
+  margin: 0;
+}
+
+.associe-page__summary .legacy-line-list {
+  gap: 10px;
+}
+
+.associe-page__requirements {
+  display: flex;
+  flex-direction: column;
+}
+
+.associe-page__requirements .legacy-card__body {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  flex: 1;
+  min-height: 180px;
+}
+
+.associe-page__requirements .legacy-card__body p + p {
+  margin-top: 0;
+}
+
+.associe-page__documents {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.associe-page__documents .legacy-doc {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.associe-page__documents .legacy-doc__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 152px;
+}
+
+.associe-page__documents .legacy-doc__actions {
+  margin-top: auto;
+}
+
 .institutional-page__grid,
 .associe-flow__grid {
   margin-top: 18px;
@@ -1384,6 +1533,21 @@ img {
   border: 0;
 }
 
+.associe-flow__grid {
+  align-items: stretch;
+}
+
+.associe-step-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.associe-step-card .legacy-card__body {
+  display: flex;
+  flex: 1;
+  min-height: 112px;
+}
+
 .contacts-page__highlight,
 .legacy-highlight {
   border-color: #cbced9;
@@ -1419,11 +1583,27 @@ img {
   background: #fff;
 }
 
+.event-detail__hero {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+}
+
 .event-detail__media img,
 .article-detail__media img {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+}
+
+.event-detail__media {
+  display: grid;
+  justify-items: center;
+  background: #f4f8fc;
+}
+
+.event-detail__media img {
+  height: min(64vh, 460px);
+  aspect-ratio: auto;
+  object-fit: contain;
 }
 
 .event-detail__media figcaption,
@@ -1518,17 +1698,6 @@ img {
   display: grid;
   gap: 10px;
   margin-top: 14px;
-}
-
-.footer-request-form {
-  display: grid;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.footer-request-form__actions {
-  display: grid;
-  gap: 10px;
 }
 
 .footer-legacy__action {
@@ -1632,7 +1801,16 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .associe-page__intro,
+  .associe-page__documents {
+    grid-template-columns: 1fr;
+  }
+
   .home-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .event-detail__hero {
     grid-template-columns: 1fr;
   }
 
@@ -1709,6 +1887,15 @@ img {
 
   .home-events__grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-kids-banner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .home-kids-banner__poster img {
+    height: min(360px, 75vw);
   }
 
   .home-events__media img {
