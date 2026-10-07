@@ -949,23 +949,32 @@ img {
   text-transform: uppercase;
 }
 
-.home-kids-banner__link {
+.home-kids-banner__content .home-kids-banner__link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-top: 10px;
-  padding: 12px 18px;
+  padding: 13px 20px;
+  border: 2px solid #a51924;
   border-radius: 999px;
-  background: #bd3037;
-  color: #fff;
+  background: #d9273e;
+  color: #ffffff !important;
   font-weight: 800;
-  text-decoration: none;
-  transition: background 160ms ease, transform 160ms ease;
+  text-decoration: none !important;
+  box-shadow: 0 5px 0 #8f1c27, 0 9px 18px rgba(143, 28, 39, 0.24);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
-.home-kids-banner__link:hover {
-  transform: translateY(-2px);
-  background: #98252b;
+.home-kids-banner__content .home-kids-banner__link:hover {
+  transform: translateY(-3px);
+  background: #bb1f34;
+  box-shadow: 0 7px 0 #8f1c27, 0 12px 22px rgba(143, 28, 39, 0.3);
+}
+
+.home-kids-banner__content .home-kids-banner__link:focus-visible {
+  outline: 3px solid #173c5a;
+  outline-offset: 4px;
 }
 
 .home-kids-banner__link span {
