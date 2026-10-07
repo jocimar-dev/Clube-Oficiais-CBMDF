@@ -76,7 +76,7 @@ const faqSchema = {
           subtitle="Fluxo de adesao com documentos, orientacao institucional e canais diretos da secretaria."
         />
         <div class="legacy-split associe-page__intro">
-          <article class="legacy-highlight">
+          <article class="legacy-highlight associe-page__summary">
             <div class="legacy-highlight__title">Quem deseja ingressar</div>
             <p>
               Consulte os documentos oficiais, preencha os formularios e utilize o atendimento da secretaria para
@@ -86,7 +86,7 @@ const faqSchema = {
               {trustSignals.map((signal) => <li>{signal}</li>)}
             </ul>
           </article>
-          <article class="legacy-card">
+          <article class="legacy-card associe-page__requirements">
             <div class="legacy-card__head">Documentos necessarios</div>
             <div class="legacy-card__body">
               <p>Copia do RG, CPF, comprovante de renda e comprovante de residencia.</p>
@@ -95,25 +95,25 @@ const faqSchema = {
             </div>
           </article>
         </div>
-        <div class="legacy-doc-grid">
+        <div class="legacy-doc-grid associe-page__documents">
           {membershipDocuments.map((entry: CollectionEntry<"documents">) => (
             <DocumentCard entry={entry} action="download" showDetailLink={false} />
           ))}
         </div>
         <div class="legacy-grid legacy-grid--3 associe-flow__grid">
-          <article class="legacy-card">
+          <article class="legacy-card associe-step-card">
             <div class="legacy-card__head">1. Baixe os formularios</div>
             <div class="legacy-card__body">
               <p>Acesse a ficha de cadastro e o requerimento de adesao disponibilizados nesta pagina.</p>
             </div>
           </article>
-          <article class="legacy-card">
+          <article class="legacy-card associe-step-card">
             <div class="legacy-card__head">2. Organize a documentacao</div>
             <div class="legacy-card__body">
               <p>Separe os documentos obrigatorios e confirme a legibilidade de cada arquivo entregue.</p>
             </div>
           </article>
-          <article class="legacy-card">
+          <article class="legacy-card associe-step-card">
             <div class="legacy-card__head">3. Fale com a secretaria</div>
             <div class="legacy-card__body">
               <p>Envie sua duvida por WhatsApp ou e-mail para concluir o atendimento com orientacao institucional.</p>
@@ -126,12 +126,6 @@ const faqSchema = {
               href: contact.whatsappHref,
               label: "Falar com a secretaria",
               trackingName: "whatsapp_click",
-              trackingLocation: "associe-cta",
-            }}
-            secondary={{
-              href: contact.emailHref,
-              label: "Solicitar orientacao por e-mail",
-              trackingName: "email_click",
               trackingLocation: "associe-cta",
             }}
           />
@@ -159,11 +153,31 @@ const faqSchema = {
               </label>
               <label>
                 <span>Telefone / WhatsApp</span>
-                <input type="tel" name="telefone" data-label="Telefone" autocomplete="tel" required />
+                <input
+                  type="tel"
+                  name="telefone"
+                  data-label="Telefone"
+                  data-phone-field
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="(99) 9999-9999"
+                  pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                  title="Informe o telefone no formato (99) 9999-9999"
+                  required
+                />
               </label>
               <label>
                 <span>E-mail</span>
-                <input type="email" name="email" data-label="E-mail" autocomplete="email" required />
+                <input
+                  type="email"
+                  name="email"
+                  data-label="E-mail"
+                  autocomplete="email"
+                  placeholder="nome@exemplo.com"
+                  pattern=".+@.+"
+                  title="Informe um e-mail valido com @"
+                  required
+                />
               </label>
               <label>
                 <span>Posto ou cargo</span>
@@ -180,9 +194,6 @@ const faqSchema = {
             </label>
             <div class="action-form__actions">
               <button class="button-primary" type="submit" data-message-channel="whatsapp">Enviar por WhatsApp</button>
-              <button class="legacy-doc__button legacy-doc__button--ghost" type="submit" data-message-channel="email">
-                Enviar por e-mail
-              </button>
             </div>
             <p class="action-form__note">
               O envio do pre-cadastro nao substitui a documentacao exigida para adesao.

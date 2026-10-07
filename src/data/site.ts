@@ -9,8 +9,8 @@ export const contact = {
     "https://wa.me/5561986257009?text=Ola%2C%20gostaria%20de%20falar%20com%20a%20secretaria%20do%20clube.",
   email: "cocbmdf@uol.com.br",
   emailHref: "mailto:cocbmdf@uol.com.br",
-  addressLine1: "SCES Trecho 2 Lote 02/35",
-  addressLine2: "CEP: 70200-002 - Brasilia, DF",
+  addressLine1: "St. de Clubes Esportivos Sul Trecho 2 - Asa Sul",
+  addressLine2: "CEP: 70297-400 - Brasilia, DF",
 };
 
 export const homeTrustStats = [
