@@ -124,6 +124,14 @@ img {
   text-transform: uppercase;
 }
 
+.legacy-brand__management {
+  margin-top: 3px;
+  color: #68717a;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
 .legacy-top__right {
   display: flex;
   flex-direction: column;
