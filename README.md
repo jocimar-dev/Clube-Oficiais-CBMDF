@@ -55,3 +55,11 @@ Os IDs estao nas configuracoes gerais do projeto Vercel ou no arquivo `.vercel/p
 ## Licenca
 Este projeto possui o arquivo `LICENSE` na raiz com os termos aplicaveis.
 
+## Endereços públicos sem extensão
+
+As páginas usam `/estrutura`, `/acomodacoes` e `/eventos/dia-das-criancas`, sem `.html` e sem barra final. Links internos, URLs canônicas e sitemap seguem esse padrão.
+
+O Astro mantém `build.format: "file"` para gerar os arquivos estáticos. Na Vercel, o `vercel.json` habilita `cleanUrls` para servir esses arquivos nos endereços sem extensão e redirecionar os antigos `.html` com HTTP 308. `/index.html` e `/index` redirecionam para `/`.
+
+Publique o projeto pela Vercel com o `vercel.json` na raiz; copiar somente `dist` para outro servidor não aplica essas regras. Em outra hospedagem, configure o comportamento equivalente. Após publicar, confira `/estrutura`, `/acomodacoes` e o redirecionamento de `/estrutura.html`, e reenvie `sitemap-index.xml` no Google Search Console.
+

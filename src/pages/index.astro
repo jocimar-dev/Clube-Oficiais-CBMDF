@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import AccommodationBanner from "../components/AccommodationBanner.astro";
 import CTAGroup from "../components/CTAGroup.astro";
 import EventCard from "../components/EventCard.astro";
 import NewsCard from "../components/NewsCard.astro";
@@ -40,6 +41,7 @@ const homeSchema = {
   <Header />
   <main class="main-content">
     <div class="container">
+      <AccommodationBanner />
       <section class="page-section home-hero home-hero--institutional">
         <div class="home-hero__content">
           <p class="home-hero__kicker">Clube dos Oficiais CBMDF</p>
@@ -58,7 +60,7 @@ const homeSchema = {
           <CTAGroup
             className="home-hero__actions"
             primary={{
-              href: "associe-se.html",
+              href: "/associe-se",
               label: "Quero me associar",
               trackingName: "associate_cta_click",
               trackingLocation: "home-hero",
@@ -73,7 +75,7 @@ const homeSchema = {
         </div>
         <aside class="home-hero__aside">
           <figure class="home-hero__media">
-            <img src="images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="eager" />
+            <img src="/images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="eager" />
             <figcaption>Endereco oficial do complexo social e administrativo do clube.</figcaption>
           </figure>
           <article class="legacy-card home-fire-card">
@@ -88,7 +90,7 @@ const homeSchema = {
       </section>
 
       <section class="home-kids-banner" aria-label="Banner da festa do Dia das Crianças">
-        <a class="home-kids-banner__poster" href="/eventos/dia-das-criancas.html" aria-label="Ver detalhes da festa do Dia das Crianças">
+        <a class="home-kids-banner__poster" href="/eventos/dia-das-criancas" aria-label="Ver detalhes da festa do Dia das Crianças">
           <img
             src="/images/evento-dia-criancas.png"
             alt="Cartaz da festa do Dia das Crianças do Clube dos Oficiais CBMDF — clique para ver detalhes"
@@ -99,7 +101,7 @@ const homeSchema = {
           <p class="home-kids-banner__eyebrow">Diversão para toda a família</p>
           <h2>Dia das Crianças</h2>
           <p>Prepare a criançada: <strong>12 de outubro, das 10h às 16h</strong>, tem brincadeiras, brinquedos infláveis, pintura, pipoca e algodão doce. Diversão para curtir juntinhos em família!</p>
-          <a class="home-kids-banner__link" href="/eventos/dia-das-criancas.html">Confira os detalhes <span aria-hidden="true">→</span></a>
+          <a class="home-kids-banner__link" href="/eventos/dia-das-criancas">Confira os detalhes <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
@@ -138,7 +140,7 @@ const homeSchema = {
           </ol>
           <CTAGroup
             primary={{
-              href: "associe-se.html",
+              href: "/associe-se",
               label: "Abrir pagina de associacao",
               trackingName: "associate_cta_click",
               trackingLocation: "home-membership-flow",
@@ -157,28 +159,28 @@ const homeSchema = {
         <SectionHeader
           title="Nossa Estrutura"
           subtitle="Destaques de estrutura, lazer e programacao social do clube."
-          linkHref="estrutura.html"
+          linkHref="/estrutura"
         />
         <div class="legacy-banner" data-banner-slider>
           <div class="legacy-banner__viewport">
             <article class="legacy-banner__slide is-active" data-banner-slide>
-              <img src="images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="lazy" />
+              <img src="/images/entrada-clube.jpg" alt="Entrada principal do Clube dos Oficiais CBMDF" loading="lazy" />
               <p class="legacy-banner__caption">Entrada principal e acesso ao complexo social do clube.</p>
             </article>
             <article class="legacy-banner__slide" data-banner-slide>
-              <img src="images/banner-salao-social.jpg" alt="Area de churrasqueiras e espaco coberto do clube" loading="lazy" />
+              <img src="/images/banner-salao-social.jpg" alt="Area de churrasqueiras e espaco coberto do clube" loading="lazy" />
               <p class="legacy-banner__caption">Churrasqueiras e espaco coberto para confraternizacao dos associados.</p>
             </article>
             <article class="legacy-banner__slide" data-banner-slide>
-              <img class="legacy-banner__img--field" src="images/banner-campo-futebol-v3.jpg" alt="Campo de futebol do Clube dos Oficiais CBMDF" loading="lazy" />
+              <img class="legacy-banner__img--field" src="/images/banner-campo-futebol-v3.jpg" alt="Campo de futebol do Clube dos Oficiais CBMDF" loading="lazy" />
               <p class="legacy-banner__caption">Campo esportivo para atividades recreativas e encontros entre associados.</p>
             </article>
             <article class="legacy-banner__slide" data-banner-slide>
-              <img class="legacy-banner__img--lower" src="images/banner-piscina.jpg" alt="Piscina do Clube dos Oficiais CBMDF" loading="lazy" />
+              <img class="legacy-banner__img--lower" src="/images/banner-piscina.jpg" alt="Piscina do Clube dos Oficiais CBMDF" loading="lazy" />
               <p class="legacy-banner__caption">Piscina social e area de descanso para lazer da familia bombeiro militar.</p>
             </article>
             <article class="legacy-banner__slide" data-banner-slide>
-              <img src="images/banner-area-verde.jpg" alt="Area de convivio e lazer do clube" loading="lazy" />
+              <img src="/images/banner-area-verde.jpg" alt="Area de convivio e lazer do clube" loading="lazy" />
               <p class="legacy-banner__caption">Ambiente de convivio para integracao institucional e eventos sociais.</p>
             </article>
           </div>
@@ -203,7 +205,7 @@ const homeSchema = {
             <div class="legacy-grid legacy-grid--2 home-events__grid home-events__grid--compact">
               {homeEvents.map((event: CollectionEntry<"events">) => <EventCard entry={event} compact />)}
             </div>
-            <p class="home-updates__link"><a href="eventos.html">Abrir pagina de eventos</a></p>
+            <p class="home-updates__link"><a href="/eventos">Abrir pagina de eventos</a></p>
           </div>
           <div class="home-updates__side">
             <h3 class="home-updates__title">Informativos recentes</h3>
@@ -217,7 +219,7 @@ const homeSchema = {
                   <div class="legacy-card__head">{document.data.title}</div>
                   <div class="legacy-card__body">
                     <p>{document.data.summary}</p>
-                    <p><a href={`/regulamentos/${document.id}.html`}>Ver detalhes do documento</a></p>
+                    <p><a href={`/regulamentos/${document.id}`}>Ver detalhes do documento</a></p>
                   </div>
                 </article>
               ))}
@@ -236,28 +238,28 @@ const homeSchema = {
             <div class="legacy-card__head">Associe-se</div>
             <div class="legacy-card__body">
               <p>Formularios, checklist documental e canais de contato para iniciar o processo.</p>
-              <p><a href="associe-se.html">Abrir pagina</a></p>
+              <p><a href="/associe-se">Abrir pagina</a></p>
             </div>
           </article>
           <article class="legacy-card home-access__card">
             <div class="legacy-card__head">Diretoria</div>
             <div class="legacy-card__body">
               <p>Gestao vigente, colegiados de governanca e quadro completo de dirigentes.</p>
-              <p><a href="diretoria.html">Abrir pagina</a></p>
+              <p><a href="/diretoria">Abrir pagina</a></p>
             </div>
           </article>
           <article class="legacy-card home-access__card">
             <div class="legacy-card__head">Regulamentos</div>
             <div class="legacy-card__body">
               <p>Estatuto, formularios, informativos e documentos oficiais em um unico local.</p>
-              <p><a href="regulamentos.html">Abrir pagina</a></p>
+              <p><a href="/regulamentos">Abrir pagina</a></p>
             </div>
           </article>
           <article class="legacy-card home-access__card">
             <div class="legacy-card__head">Contatos</div>
             <div class="legacy-card__body">
               <p>Telefone, WhatsApp, e-mail institucional e horarios de atendimento da secretaria.</p>
-              <p><a href="contatos.html">Abrir pagina</a></p>
+              <p><a href="/contatos">Abrir pagina</a></p>
             </div>
           </article>
         </div>

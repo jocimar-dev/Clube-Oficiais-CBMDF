@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/site';
+
+const photos = [
+  { file: 'suite-1', label: 'Suíte com duas camas de solteiro' },
+  { file: 'fachada', label: 'Fachada das acomodações do clube' },
+  { file: 'suite-2', label: 'Outra vista das acomodações' },
+  { file: 'cozinha', label: 'Cozinha compartilhada' },
+  { file: 'banheiro', label: 'Banheiro privativo' },
+  { file: 'suite-01-01', label: 'Suíte 1 · TV e ar-condicionado' },
+  { file: 'suite-01-02', label: 'Suíte 1 · camas de solteiro' },
+  { file: 'suite-01-04', label: 'Suíte 1 · vista do quarto' },
+  { file: 'suite-01-06', label: 'Suíte 1 · detalhes do banheiro' },
+  { file: 'suite-02-01', label: 'Suíte 2 · entrada do quarto' },
+  { file: 'suite-02-02', label: 'Suíte 2 · banheiro' },
+  { file: 'suite-02-03', label: 'Suíte 2 · vista do quarto' },
+  { file: 'suite-02-04', label: 'Suíte 2 · TV e cama de solteiro' },
+  { file: 'cozinha-01', label: 'Cozinha compartilhada · mesa e circulação' },
+  { file: 'cozinha-03', label: 'Cozinha compartilhada · equipamentos' },
+  { file: 'fachada-02', label: 'Fachada · vista externa' },
+  { file: 'fachada-03', label: 'Fachada · entrada das acomodações' },
+];
+const listings = [
+  'https://www.airbnb.com.br/rooms/1490704593190799560?guests=1&adults=1&s=67&unique_share_id=ce539122-b576-4079-8214-184c149aa352',
+  'https://www.airbnb.com.br/rooms/1495683546581372080?guests=1&adults=1&s=67&unique_share_id=0818811f-d00e-43e2-bd11-c34b15561fbb',
+];
+const whatsapp = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent('Olá! Sou sócio e gostaria de consultar a disponibilidade das acomodações do clube, com diária de R$ 150,00 por quarto.')}`;
+const amenities = [
+  ['☾', 'Duas camas de solteiro', 'Um espaço para descansar.'],
+  ['❄', 'Ar-condicionado', 'Conforto na sua estadia.'],
+  ['▣', 'Smart TV e Wi-Fi', 'Para relaxar e se conectar.'],
+  ['◈', 'Banheiro privativo', 'Mais privacidade para você.'],
+  ['♧', 'Cozinha compartilhada', 'Frigobar, micro-ondas e utensílios.'],
+  ['P', 'Estacionamento no local', 'Praticidade na chegada.'],
+];
+---
+
+<BaseLayout title="Acomodações" description="Hospede-se no Clube dos Oficiais CBMDF, em Brasília. Diária para sócios de R$ 150,00 por quarto. Não sócios podem reservar pelo Airbnb." ogImage="/images/acomodacoes/suite-1.webp" breadcrumbs={[{label:'Início',href:'/'},{label:'Acomodações'}]}>
+  <Header />
+  <main class="stay">
+    <div class="container">
+      <nav class="crumb" aria-label="Navegação estrutural"><a href="/">Início</a><span aria-hidden="true">/</span><span>Acomodações</span></nav>
+      <header class="stay-heading">
+        <p class="eyebrow">SINTA-SE EM CASA NO CLUBE</p>
+        <h1>Seu descanso tem lugar aqui.</h1>
+        <p>Uma estadia acolhedora, com o clube pertinho de você.</p>
+        <a class="location" href="/localizacao">⌖ Setor de Clubes Sul · Brasília, DF</a>
+      </header>
+
+      <section class="photo-grid" aria-label="Fotos das acomodações">
+        {photos.slice(0, 5).map((photo, index) => <a href={`#foto-${index}`} class:list={['photo', {'photo-main':index === 0}]} aria-label={`Ver foto: ${photo.label}`}><img src={`/images/acomodacoes/${photo.file}.webp`} alt={photo.label} loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} /><span>{index === 0 ? 'Conheça seu próximo descanso' : photo.label}</span></a>)}
+        <a href="#galeria" class="all-photos">▦ Ver todas as {photos.length} fotos</a>
+      </section>
+
+      <div class="stay-layout">
+        <div>
+          <section class="intro">
+            <p class="eyebrow">ACOMODAÇÕES DO CLUBE DOS OFICIAIS</p>
+            <h2>Chegue, acomode-se e aproveite.</h2>
+            <p>Suítes com duas camas de solteiro, banheiro privativo e o essencial para uma estadia confortável. Tudo dentro do Clube dos Oficiais CBMDF, no Setor de Clubes Sul.</p>
+            <div class="highlights"><span>2 camas de solteiro</span><span>Banheiro privativo</span><span>Cozinha compartilhada</span></div>
+          </section>
+          <section class="amenities">
+            <h2>Conforto nos pequenos detalhes</h2>
+            <div class="amenity-grid">{amenities.map(([icon,title,description])=><div class="amenity"><span aria-hidden="true" class="amenity-icon">{icon}</span><div><h3>{title}</h3><p>{description}</p></div></div>)}</div>
+          </section>
+          <section class="leisure"><span class="eyebrow">MAIS QUE UMA ESTADIA</span><h2>Reserve um tempo para você.</h2><p>Piscina e sauna também fazem parte da experiência no clube. Consulte os horários de funcionamento e as orientações de uso para planejar seus momentos de lazer.</p><a href="/horarios">Conhecer os horários do clube <span aria-hidden="true">→</span></a></section>
+        </div>
+        <aside id="reservas" class="booking" aria-labelledby="booking-title">
+          <span class="member-tag">CONDIÇÃO ESPECIAL PARA SÓCIOS</span>
+          <h2 id="booking-title">Seu próximo descanso</h2>
+          <p class="price">R$ 150,00</p>
+          <p class="price-note">por diária · por quarto</p>
+          <a class="reserve-button" href={whatsapp} target="_blank" rel="noopener noreferrer">Sou sócio · consultar disponibilidade <span aria-hidden="true">↗</span></a>
+          <p class="booking-note">Fale com a secretaria para consultar datas e combinar sua reserva.</p>
+          <div class="airbnb"><h3>Não é sócio? Você também é bem-vindo.</h3><p>Escolha um dos anúncios e reserve pelo Airbnb.</p>{listings.map((href,index)=><a class="airbnb-link" href={href} target="_blank" rel="noopener noreferrer">Ver acomodação {index+1} no Airbnb <span aria-hidden="true">↗</span></a>)}<small>Para não sócios, valores, disponibilidade e condições são os informados no Airbnb.</small></div>
+        </aside>
+      </div>
+
+      <section class="airbnb-section" aria-labelledby="airbnb-title">
+        <p class="eyebrow">SEJA BEM-VINDO AO CLUBE</p>
+        <h2 id="airbnb-title">Não é sócio? Reserve pelo Airbnb.</h2>
+        <p>Confira as acomodações e escolha as datas da sua estadia. Os valores e as condições para não sócios são os apresentados no Airbnb.</p>
+        <div class="airbnb-cards">
+          {listings.map((href, index) => (
+            <article class="airbnb-card">
+              <h3>Acomodação {index + 1}</h3>
+              <div class="airbnb-embed-frame" data-id={new URL(href).pathname.split('/').pop()} data-view="home" data-hide-price="true" data-hide-reviews="true" style="width:100%;max-width:450px;height:300px;margin:auto">
+                <a href={href} target="_blank" rel="noopener noreferrer">Ver no Airbnb</a>
+                <a href={href} target="_blank" rel="nofollow noopener noreferrer">Casa · Brasília · 1 quarto · 2 camas · 1 banheiro privado</a>
+              </div>
+              <a class="airbnb-link" href={href} target="_blank" rel="noopener noreferrer">Ver acomodação {index + 1} no Airbnb <span aria-hidden="true">↗</span></a>
+            </article>
+          ))}
+        </div>
+      </section>
+      <script is:inline async src="https://www.airbnb.com.br/embeddable/airbnb_jssdk"></script>
+
+      <section id="galeria" class="gallery-section">
+        <p class="eyebrow">UM OLHAR MAIS DE PERTO</p><h2>Conheça os espaços</h2>
+        <div class="full-gallery">{photos.map((photo,index)=><figure id={`foto-${index}`}><a href={`/images/acomodacoes/${photo.file}.webp`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir foto ampliada: ${photo.label}`}><img src={`/images/acomodacoes/${photo.file}.webp`} alt={photo.label} loading="lazy" width="700" height="525" /></a><figcaption>{photo.label}</figcaption></figure>)}</div>
+      </section>
+      <section class="questions"><h2>Antes de fazer as malas</h2><details><summary>Como funciona a reserva para sócios?</summary><p>A diária é de R$ 150,00 por quarto. Entre em contato com a secretaria para consultar disponibilidade, confirmar sua condição de sócio e receber as orientações da reserva.</p></details><details><summary>Posso me hospedar sem ser sócio?</summary><p>Sim. Acesse um dos dois anúncios do Airbnb acima para consultar as datas, os valores e as condições da sua estadia.</p></details><details><summary>Onde ficam as acomodações?</summary><p>Dentro do Clube dos Oficiais CBMDF, no {contact.addressLine1}, Brasília, DF. <a href="/localizacao">Veja como chegar.</a></p></details><details><summary>Como consultar check-in, check-out e regras da estadia?</summary><p>Sócios podem confirmar as informações com a secretaria. Para reservas pelo Airbnb, consulte as regras e condições no anúncio escolhido antes de reservar.</p></details></section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .airbnb-section{padding-top:56px}.airbnb-section h2{margin-top:10px}.airbnb-section>p:not(.eyebrow){color:#6e6863;max-width:720px}.airbnb-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:24px}.airbnb-card{min-width:0;padding:20px;border:1px solid #e8e3de;border-radius:16px;background:#faf9f7}.airbnb-card h3{font-size:17px;margin-bottom:16px}.airbnb-embed-frame{overflow:hidden}.airbnb-embed-frame>a{display:block;margin:12px;text-decoration:underline}.airbnb-embed-frame :global(iframe){max-width:100%!important}.airbnb-card>.airbnb-link{background:white}
+  @media(max-width:700px){.airbnb-cards{grid-template-columns:1fr}.airbnb-card{padding:14px}.airbnb-section{padding-top:40px}}
+  .stay{background:#fff;color:#292725;padding:0 0 70px}.crumb{display:flex;gap:12px;padding:24px 0;color:#6e6863;font-size:13px}.crumb a:hover{text-decoration:underline}.stay-heading{padding:14px 0 28px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.8px;color:#a71f27}.stay h1{font-size:clamp(32px,4.4vw,52px);line-height:1.13;letter-spacing:-1.8px;margin:12px 0}.stay-heading>p:not(.eyebrow){font-size:18px;color:#6e6863}.location{display:inline-block;margin-top:16px;font-size:14px;text-decoration:underline;text-underline-offset:4px}.photo-grid{position:relative;display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:210px 210px;gap:8px;border-radius:20px;overflow:hidden}.photo{position:relative;overflow:hidden;background:#eee}.photo-main{grid-row:span 2}.photo img{width:100%;height:100%;object-fit:cover;transition:transform .25s}.photo:hover img{transform:scale(1.035)}.photo span{position:absolute;inset:auto 0 0;padding:28px 14px 14px;background:linear-gradient(transparent,#0009);color:white;font-size:12px}.photo-main span{font-size:16px;padding:40px 24px 24px}.all-photos{position:absolute;right:18px;bottom:18px;background:white;border:1px solid #ddd;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:650;box-shadow:0 2px 10px #0002}.photo:last-of-type span{padding-bottom:64px}.stay-layout{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:64px;margin-top:44px;align-items:start}.stay h2{font-size:26px;letter-spacing:-.6px;line-height:1.25;margin-bottom:18px}.intro h2{margin-top:12px}.intro>p:not(.eyebrow),.leisure p{color:#6e6863;line-height:1.8}.highlights{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.highlights span{border:1px solid #e8e3de;border-radius:30px;padding:7px 12px;font-size:12px}.amenities{margin:30px 0;padding:30px 0;border-block:1px solid #e8e3de}.amenity-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 18px;margin-top:26px}.amenity{display:flex;gap:14px}.amenity-icon{font-size:25px;width:32px;flex-shrink:0;color:#8b252c}.amenity h3{font-size:14px;font-weight:650}.amenity p{font-size:12px;color:#6e6863;margin-top:4px}.leisure{padding:26px;background:#f7f4f0;border-radius:16px}.leisure h2{margin-top:10px}.leisure a{display:inline-block;margin-top:18px;font-size:14px;font-weight:650;text-decoration:underline;text-underline-offset:4px}.booking{position:sticky;top:24px;padding:26px;border:1px solid #e4ded8;border-radius:18px;box-shadow:0 10px 35px #352b2110;scroll-margin-top:25px}.member-tag{display:inline-block;border-radius:6px;background:#faeeee;color:#92232a;font-size:10px;letter-spacing:.7px;font-weight:750;padding:7px 9px}.booking h2{font-size:20px;margin:20px 0 12px}.price{font-size:39px;line-height:1.2;font-weight:750;letter-spacing:-1.2px}.price-note{font-size:14px;color:#6e6863;margin-top:5px}.reserve-button{display:block;background:#a71f27;color:#fff;border-radius:9px;padding:15px 12px;text-align:center;font-size:13px;font-weight:700;margin-top:23px}.reserve-button:hover{background:#80181f}.booking-note{text-align:center;color:#6e6863;font-size:12px;line-height:1.6;margin-top:12px}.airbnb{margin-top:24px;padding-top:23px;border-top:1px solid #e8e3de}.airbnb h3{font-size:16px}.airbnb p{font-size:13px;color:#6e6863;margin:8px 0 15px}.airbnb-link{display:flex;justify-content:space-between;gap:10px;border:1px solid #cfc7c0;border-radius:9px;padding:12px;font-size:13px;font-weight:650;margin-top:9px}.airbnb-link:hover{background:#f7f4f0}.airbnb small{display:block;color:#6e6863;font-size:11px;margin-top:13px;line-height:1.6}.gallery-section{padding-top:64px;scroll-margin-top:20px}.gallery-section h2{margin-top:10px}.full-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 16px}.full-gallery figure{scroll-margin-top:24px}.full-gallery img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:12px}.full-gallery figcaption{font-size:13px;color:#6e6863;margin-top:8px}.questions{max-width:760px;margin-top:60px}.questions details{border-bottom:1px solid #e8e3de;padding:20px 0}.questions summary{cursor:pointer;font-weight:650;font-size:15px}.questions details p{font-size:14px;color:#6e6863;margin-top:14px;line-height:1.8}.questions a{text-decoration:underline}
+  @media(max-width:1000px){.stay-layout{gap:30px;grid-template-columns:minmax(0,1fr) 330px}.photo-grid{grid-template-rows:170px 170px}.amenity-grid{grid-template-columns:1fr}.booking{padding:22px}}
+  @media(max-width:700px){.stay-heading{padding-top:4px}.stay h1{letter-spacing:-1px}.stay-heading>p:not(.eyebrow){font-size:16px}.photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:245px 135px}.photo-main{grid-column:span 2;grid-row:auto}.photo:nth-child(n+4){display:none}.photo span{display:none}.all-photos{bottom:12px;right:12px}.stay-layout{display:flex;flex-direction:column;gap:28px;margin-top:28px}.stay-layout>div{display:contents}.intro{order:0}.booking{order:1;position:static;width:100%}.amenities{order:2;width:100%;margin:0}.leisure{order:3}.amenity-grid{grid-template-columns:1fr 1fr;gap:22px 12px}.amenity{gap:7px}.amenity h3{font-size:13px}.amenity-icon{width:24px;font-size:22px}.full-gallery{grid-template-columns:1fr 1fr}.full-gallery figure:first-child{grid-column:span 2}.stay h2{font-size:23px}.gallery-section{padding-top:42px}.questions{margin-top:40px}}
+  @media(prefers-reduced-motion:reduce){.photo img{transition:none}}
+</style>

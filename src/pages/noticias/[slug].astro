@@ -26,8 +26,8 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { label: "Inicio", href: "/index.html" },
-  { label: "Noticias", href: "/noticias.html" },
+  { label: "Inicio", href: "/" },
+  { label: "Noticias", href: "/noticias" },
   { label: entry.data.title },
 ];
 
@@ -84,7 +84,7 @@ const articleSchema = {
                 )}
                 <div class="article-detail__actions">
                   <CTAGroup
-                    primary={{ href: "/noticias.html", label: "Voltar para noticias" }}
+                    primary={{ href: "/noticias", label: "Voltar para noticias" }}
                     secondary={{
                       href: contact.whatsappHref,
                       label: "Solicitar informativos no WhatsApp",

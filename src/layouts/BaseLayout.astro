@@ -23,7 +23,12 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL("https://clubedosoficiaiscbmdf.com.br");
-const canonicalUrl = new URL(canonical ?? Astro.url.pathname, site).toString();
+const canonicalAddress = new URL(canonical ?? Astro.url.pathname, site);
+canonicalAddress.pathname = canonicalAddress.pathname
+  .replace(/\/index\.html$/, "/")
+  .replace(/\.html$/, "")
+  .replace(/\/$/, "") || "/";
+const canonicalUrl = canonicalAddress.toString();
 const ogImageUrl = new URL(ogImage, site).toString();
 const pageTitle = title.includes("Clube dos Oficiais CBMDF")
   ? title
@@ -123,6 +128,6 @@ const structuredData = [organizationSchema, ...pageSchemas, ...(breadcrumbSchema
         track(name, properties);
       };
     </script>
-    <script is:inline src="/app.js?v=20260313-2"></script>
+    <script is:inline src="/app.js?v=20261009-1"></script>
   </body>
 </html>

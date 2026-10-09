@@ -8,8 +8,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { contact, membershipBenefits } from "../data/site";
 
 const breadcrumbs = [
-  { label: "Inicio", href: "index.html" },
-  { label: "Institucional", href: "institucional.html" },
+  { label: "Inicio", href: "/" },
+  { label: "Institucional", href: "/institucional" },
   { label: "Beneficios e Convenios" },
 ];
 ---
@@ -49,13 +49,13 @@ const breadcrumbs = [
             <div class="legacy-card__head">Atendimento para associados</div>
             <div class="legacy-card__body">
               <p>Contato direto para associacao, agenda, orientacoes de uso e esclarecimentos institucionais.</p>
-              <p><a href="contatos.html">Abrir contatos</a></p>
+              <p><a href="/contatos">Abrir contatos</a></p>
             </div>
           </article>
         </div>
         <div class="associe-page__cta">
           <CTAGroup
-            primary={{ href: "associe-se.html", label: "Iniciar associacao" }}
+            primary={{ href: "/associe-se", label: "Iniciar associacao" }}
             secondary={{ href: contact.whatsappHref, label: "Consultar a secretaria" }}
           />
         </div>

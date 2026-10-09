@@ -25,8 +25,8 @@ interface Props {
 const { entry } = Astro.props;
 
 const breadcrumbs = [
-  { label: "Inicio", href: "/index.html" },
-  { label: "Eventos", href: "/eventos.html" },
+  { label: "Inicio", href: "/" },
+  { label: "Eventos", href: "/eventos" },
   { label: entry.data.title },
 ];
 
@@ -90,7 +90,7 @@ const eventSchema = {
               <div class="event-detail__actions">
                 <CTAGroup
                   primary={{ href: contact.whatsappHref, label: "Falar com a secretaria" }}
-                  secondary={{ href: "/eventos.html", label: "Voltar para eventos" }}
+                  secondary={{ href: "/eventos", label: "Voltar para eventos" }}
                 />
               </div>
             </div>
