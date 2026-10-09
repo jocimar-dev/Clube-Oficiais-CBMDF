@@ -1,4 +1,5 @@
-﻿# Clube de Oficiais CBMDF - Site Institucional
+V2 - Site mais simplificado
+# Clube de Oficiais CBMDF - Site Institucional
 
 Site estatico institucional do Clube de Oficiais dos Bombeiros do DF, com layout legado responsivo.
 
