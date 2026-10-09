@@ -9,7 +9,7 @@ import TrustStats from "../components/TrustStats.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const breadcrumbs = [
-  { label: "Inicio", href: "/" },
+  { label: "Início", href: "/" },
   { label: "Diretoria" },
 ];
 
@@ -27,7 +27,7 @@ const fiscalBoard: CollectionEntry<"leadership">[] = leadership.filter(
 );
 
 const boardStats = [
-  { value: "2026/2027", label: "Mandato publicado", note: "Gestao vigente apresentada no portal." },
+  { value: "2026/2027", label: "Mandato publicado", note: "Gestão vigente apresentada no portal." },
   { value: `${executiveBoard.length}`, label: "Integrantes na diretoria executiva" },
   { value: `${deliberativeBoard.length}`, label: "Integrantes no conselho deliberativo" },
   { value: `${fiscalBoard.length}`, label: "Integrantes no conselho fiscal" },
@@ -36,7 +36,7 @@ const boardStats = [
 
 <BaseLayout
   title="Diretoria"
-  description="Gestao COCBMDF 2026/2027 com diretoria executiva, conselho deliberativo e conselho fiscal."
+  description="Gestão COCBMDF 2026/2027 com diretoria executiva, conselho deliberativo e conselho fiscal."
   breadcrumbs={breadcrumbs}
 >
   <Header />
@@ -47,17 +47,17 @@ const boardStats = [
         <SectionHeader
           title="Diretoria"
           level="h1"
-          subtitle="Gestao COCBMDF 2026/2027 com organizacao colegiada, cargos executivos e governanca institucional."
+          subtitle="Gestão COCBMDF 2026/2027 com organização colegiada, cargos executivos e governança institucional."
         />
         <div class="legacy-split diretoria-page__intro">
           <div>
             <p>
-              A estrutura de governanca do clube esta organizada em diretoria executiva, conselho deliberativo e
-              conselho fiscal, com definicao publica de cargos, nomes e postos.
+              A estrutura de governança do clube está organizada em diretoria executiva, conselho deliberativo e
+              conselho fiscal, com definição pública de cargos, nomes e postos.
             </p>
             <p class="page-copy-spaced">
-              A apresentacao abaixo reforca a autoridade institucional e facilita a consulta por associados,
-              convidados e interessados em acompanhar a gestao vigente.
+              A apresentação abaixo reforça a autoridade institucional e facilita a consulta por associados,
+              convidados e interessados em acompanhar a gestão vigente.
             </p>
           </div>
           <TrustStats items={boardStats} className="trust-stats--compact" />
@@ -65,17 +65,17 @@ const boardStats = [
         <div class="legacy-table-stack">
           <LeadershipTable
             title="Diretoria Executiva"
-            description="Responsavel pela conducao administrativa, financeira, social e operacional da gestao."
+            description="Responsável pela condução administrativa, financeira, social e operacional da gestão."
             members={executiveBoard}
           />
           <LeadershipTable
             title="Conselho Deliberativo"
-            description="Colegiado de apoio institucional e deliberacao das pautas regimentais."
+            description="Colegiado de apoio institucional e deliberação das pautas regimentais."
             members={deliberativeBoard}
           />
           <LeadershipTable
             title="Conselho Fiscal"
-            description="Colegiado destinado ao acompanhamento e a fiscalizacao dos controles institucionais."
+            description="Colegiado destinado ao acompanhamento e à fiscalização dos controles institucionais."
             members={fiscalBoard}
           />
         </div>

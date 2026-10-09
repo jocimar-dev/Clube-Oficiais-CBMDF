@@ -30,6 +30,11 @@ const breadcrumbs = [
   { label: entry.data.title },
 ];
 
+const eventImageUrl = new URL(
+  entry.data.cover,
+  Astro.site ?? "https://clubedosoficiaiscbmdf.com.br",
+).toString();
+
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
@@ -37,7 +42,7 @@ const eventSchema = {
   startDate: entry.data.startDate.toISOString(),
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
-  image: [`https://clubedosoficiaiscbmdf.com.br${entry.data.cover}`],
+  image: [eventImageUrl],
   location: {
     "@type": "Place",
     name: entry.data.location,

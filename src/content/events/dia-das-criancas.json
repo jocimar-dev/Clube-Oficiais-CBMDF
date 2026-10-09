@@ -1,11 +1,11 @@
 {
-  "title": "Dia das Criancas",
-  "summary": "Programacao infantil com brincadeiras, pintura e atividades para toda a familia.",
+  "title": "Dia das Crianças",
+  "summary": "Programação infantil com brincadeiras, pintura e atividades para toda a família.",
   "startDate": "2026-10-12",
-  "time": "10h as 16h",
+  "time": "10h às 16h",
   "location": "Clube dos Oficiais CBMDF",
   "status": "social",
-  "cover": "/images/evento-dia-criancas.png",
+  "cover": "https://clubedosoficiaiscbmdf.com.br/images/evento-dia-criancas-2026.jpeg",
   "highlights": [
     "Atividades recreativas voltadas ao publico infantil.",
     "Integracao familiar com brincadeiras e convivencia social.",
