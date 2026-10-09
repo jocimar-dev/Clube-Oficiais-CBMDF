@@ -49,12 +49,29 @@ const homeSchema = {
           {homeTrustStats.map((stat) => <div><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}
         </dl>
       </section>
+<<<<<<< HEAD
       <section class="benefits" aria-labelledby="benefits-title">
         <p class="eyebrow">MAIS MOTIVOS PARA FAZER PARTE</p>
         <h2 id="benefits-title">Benefícios de ser associado</h2>
         <p class="section-intro">Espaços e experiências para aproveitar o clube do seu jeito.</p>
         <div class="benefits-grid">
           {membershipBenefits.map((benefit, index) => <article><span class="benefit-number" aria-hidden="true">0{index + 1}</span><h3>{benefit.title}</h3><p>{benefit.description}</p></article>)}
+=======
+
+      <section class="home-kids-banner" aria-label="Banner da festa do Dia das Crianças">
+        <a class="home-kids-banner__poster" href="/eventos/dia-das-criancas.html" aria-label="Ver detalhes da festa do Dia das Crianças">
+          <img
+            src="/images/evento-dia-criancas-2026.jpeg"
+            alt="Cartaz da festa do Dia das Crianças do Clube dos Oficiais CBMDF — clique para ver detalhes"
+            loading="eager"
+          />
+        </a>
+        <div class="home-kids-banner__content">
+          <p class="home-kids-banner__eyebrow">Diversão para toda a família</p>
+          <h2>Dia das Crianças</h2>
+          <p>Prepare a criançada: <strong>12 de outubro, das 10h às 16h</strong>, tem animação, brinquedos infláveis, algodão-doce e pipoca. Diversão para curtir juntinhos em família!</p>
+          <a class="home-kids-banner__link" href="/eventos/dia-das-criancas.html">Confira os detalhes <span aria-hidden="true">→</span></a>
+>>>>>>> origin/main
         </div>
       </section>
       <section class="membership" aria-labelledby="membership-title">
