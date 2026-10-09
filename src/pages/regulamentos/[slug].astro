@@ -32,9 +32,9 @@ const relatedDocuments: CollectionEntry<"documents">[] = (await getCollection("d
   .slice(0, 2);
 
 const breadcrumbs = [
-  { label: "Inicio", href: "/index.html" },
-  { label: "Institucional", href: "/institucional.html" },
-  { label: "Regulamentos", href: "/regulamentos.html" },
+  { label: "Inicio", href: "/" },
+  { label: "Institucional", href: "/institucional" },
+  { label: "Regulamentos", href: "/regulamentos" },
   { label: entry.data.title },
 ];
 
@@ -93,7 +93,7 @@ const categoryGuidance = {
                 Em caso de duvida sobre aplicacao, validade ou encaminhamento, procure a secretaria pelos canais
                 institucionais do clube.
               </p>
-              <p><a href="/regulamentos.html">Voltar para o repositorio de documentos</a></p>
+              <p><a href="/regulamentos">Voltar para o repositorio de documentos</a></p>
             </div>
           </article>
         </div>

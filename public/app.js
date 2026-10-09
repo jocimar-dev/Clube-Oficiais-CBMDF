@@ -1,6 +1,6 @@
 const currentSegments = window.location.pathname.split('/').filter(Boolean);
-const currentPath = currentSegments[currentSegments.length - 1] || 'index.html';
-const currentSection = currentSegments[0] || 'index.html';
+const currentPath = currentSegments[currentSegments.length - 1] || 'index';
+const currentSection = currentSegments[0] || 'index';
 const currentHash = window.location.hash || '';
 
 const trackEvent = (name, properties = {}) => {
@@ -107,7 +107,7 @@ document.addEventListener('click', (event) => {
     location: window.location.pathname,
   };
 
-  if (lowerHref.includes('associe-se.html')) {
+  if (lowerHref.includes('associe-se')) {
     trackEvent('associate_cta_click', payload);
     return;
   }
@@ -152,8 +152,8 @@ navLinks.forEach((link) => {
 
   const isPathMatch =
     basePath === currentPath ||
-    (currentPath === 'index.html' && basePath === '') ||
-    (currentSection !== currentPath && basePath === `${currentSection}.html`);
+    (currentPath === 'index' && basePath === '') ||
+    (currentSection !== currentPath && basePath === currentSection);
   if (!isPathMatch) return;
 
   let isActive = false;
@@ -176,19 +176,20 @@ navLinks.forEach((link) => {
 if (!activeGroup) {
   const pathGroupMap = {
     institucional: [
-      'institucional.html',
-      'historia.html',
-      'horarios.html',
-      'conheca-clube.html',
-      'regulamentos.html'
+      'institucional',
+      'historia',
+      'horarios',
+      'conheca-clube',
+      'regulamentos'
     ],
-    diretoria: ['diretoria.html'],
-    estrutura: ['estrutura.html'],
-    associe: ['associe-se.html'],
-    localizacao: ['localizacao.html'],
-    contatos: ['contatos.html'],
-    noticias: ['noticias.html'],
-    eventos: ['eventos.html']
+    diretoria: ['diretoria'],
+    estrutura: ['estrutura'],
+    acomodacoes: ['acomodacoes'],
+    associe: ['associe-se'],
+    localizacao: ['localizacao'],
+    contatos: ['contatos'],
+    noticias: ['noticias'],
+    eventos: ['eventos']
   };
 
   Object.entries(pathGroupMap).forEach(([group, paths]) => {

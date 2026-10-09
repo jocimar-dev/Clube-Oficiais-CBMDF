@@ -24,7 +24,7 @@ const yearFilter = filterValue ?? String(entry.data.publishedAt.getFullYear());
     <p>{entry.data.summary}</p>
     <p class="legacy-card__meta">Publicado em {formatMonthYear(entry.data.publishedAt)}</p>
     <div class="news-card__actions">
-      <a href={`/noticias/${entry.slug}.html`}>Ler detalhes</a>
+      <a href={`/noticias/${entry.slug}`}>Ler detalhes</a>
       {entry.data.pdfUrl && (
         <a href={entry.data.pdfUrl} target="_blank" rel="noopener noreferrer">Abrir PDF</a>
       )}

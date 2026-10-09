@@ -8,7 +8,7 @@ import SectionHeader from "../components/SectionHeader.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const breadcrumbs = [
-  { label: "Inicio", href: "index.html" },
+  { label: "Inicio", href: "/" },
   { label: "Noticias" },
 ];
 
@@ -49,7 +49,7 @@ const news: CollectionEntry<"news">[] = (await getCollection("news")).sort(
             <div class="legacy-card__head">Eventos e agenda</div>
             <div class="legacy-card__body">
               <p>Consulte registros de eventos, comunicados comemorativos e programacoes ja publicadas no portal.</p>
-              <p><a href="eventos.html">Abrir pagina de eventos</a></p>
+              <p><a href="/eventos">Abrir pagina de eventos</a></p>
             </div>
           </article>
         </div>

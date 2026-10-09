@@ -16,42 +16,42 @@ export const contact = {
 export const homeTrustStats = [
   {
     value: "1989",
-    label: "Ano de fundacao institucional",
-    note: "Marco registrado na historia do clube.",
+    label: "Ano de fundação institucional",
+    note: "Marco registrado na história do clube.",
   },
   {
     value: "2026/2027",
-    label: "Gestao atualmente publicada",
+    label: "Gestão atualmente publicada",
     note: "Mandato institucional em vigor no portal.",
   },
   {
     value: "3",
-    label: "Informativos disponiveis",
-    note: "Edicoes publicadas para consulta em PDF.",
+    label: "Informativos disponíveis",
+    note: "Edições publicadas para consulta em PDF.",
   },
   {
     value: "3",
-    label: "Colegiados de governanca",
+    label: "Colegiados de governança",
     note: "Diretoria executiva, conselho deliberativo e fiscal.",
   },
 ];
 
 export const membershipBenefits = [
   {
-    title: "Convivencia institucional",
-    description: "Ambiente de integracao entre oficiais, familiares e convidados autorizados.",
+    title: "Convivência institucional",
+    description: "Ambiente de integração entre oficiais, familiares e convidados autorizados.",
   },
   {
     title: "Estrutura de lazer",
-    description: "Piscinas, espacos de convivio, churrasqueiras e areas sociais em operacao.",
+    description: "Piscinas, espaços de convívio, churrasqueiras e áreas sociais em operação.",
   },
   {
     title: "Agenda social e comemorativa",
-    description: "Eventos institucionais, atividades familiares e encontros tematicos ao longo do ano.",
+    description: "Eventos institucionais, atividades familiares e encontros temáticos ao longo do ano.",
   },
   {
     title: "Atividades esportivas",
-    description: "Espacos para lazer ativo, recreacao e praticas esportivas dos associados.",
+    description: "Espaços para lazer ativo, recreação e práticas esportivas dos associados.",
   },
 ];
 

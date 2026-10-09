@@ -31,6 +31,6 @@ const { entry, compact = false, state } = Astro.props;
       {entry.data.time && <> | {entry.data.time}</>}
     </p>
     <p class="legacy-card__meta">{eventStatusLabel(entry)} | {entry.data.location}</p>
-    <p><a href={`/eventos/${entry.id}.html`}>Ver detalhes do evento</a></p>
+    <p><a href={`/eventos/${entry.id}`}>Ver detalhes do evento</a></p>
   </div>
 </article>

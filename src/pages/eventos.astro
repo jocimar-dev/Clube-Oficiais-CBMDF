@@ -11,7 +11,7 @@ import { contact } from "../data/site";
 import { isUpcomingEvent } from "../data/content-utils";
 
 const breadcrumbs = [
-  { label: "Inicio", href: "index.html" },
+  { label: "Inicio", href: "/" },
   { label: "Eventos" },
 ];
 
@@ -57,7 +57,7 @@ const eventsSchema = {
             <div class="events-page__actions">
               <CTAGroup
                 primary={{ href: contact.whatsappHref, label: "Confirmar programacao" }}
-                secondary={{ href: "noticias.html", label: "Ver informativos" }}
+                secondary={{ href: "/noticias", label: "Ver informativos" }}
               />
             </div>
           </article>
